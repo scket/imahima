@@ -10,5 +10,6 @@
   - [segue](https://qiita.com/misakiagata/items/b7f6c2f6c9f988ec38c7)は連結できてると思うんだけど，なんかSecondViewControllerで情報とれてない？
     - ViewControllerでは名前とかとれてる(ViewControllerのl99-l102)
     - 試しにSecondViewControllerにLabelはったら表示されてるのでsegueの問題ではなさそう
-   
+    - と思ったけどMain.storyboardにSecondViewControllerのoutletと紐付けしたら画像と名前とアドレス表示できた
+    - Facebookログインはこれで一通り完成
   
