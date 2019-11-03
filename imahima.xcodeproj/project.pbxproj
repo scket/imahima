@@ -3,27 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172343236EE54F006E0FA6 /* AppDelegate.swift */; };
 		B6172346236EE54F006E0FA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172345236EE54F006E0FA6 /* SceneDelegate.swift */; };
 		B6172348236EE54F006E0FA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172347236EE54F006E0FA6 /* ViewController.swift */; };
-		B617234B236EE54F006E0FA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6172349236EE54F006E0FA6 /* Main.storyboard */; };
 		B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B617234C236EE550006E0FA6 /* Assets.xcassets */; };
 		B6172350236EE550006E0FA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B617234E236EE550006E0FA6 /* LaunchScreen.storyboard */; };
+		B67143B5236EE75B000BDF62 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67143B4236EE75B000BDF62 /* SecondViewController.swift */; };
+		B6925CD4236EF0BA00F539D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6925CD3236EF0BA00F539D9 /* Main.storyboard */; };
+		B6925CD8236EFDDE00F539D9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6925CD7236EFDDE00F539D9 /* UserDefaults.swift */; };
+		FDBD73400E6D48A3AEC8E24E /* Pods_imahima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5102E856062455B964559FF3 /* Pods_imahima.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5102E856062455B964559FF3 /* Pods_imahima.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_imahima.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0DD17FC7CFD50D6C8C4ED56 /* Pods-imahima.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imahima.debug.xcconfig"; path = "Target Support Files/Pods-imahima/Pods-imahima.debug.xcconfig"; sourceTree = "<group>"; };
 		B6172340236EE54F006E0FA6 /* imahima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imahima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6172343236EE54F006E0FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6172345236EE54F006E0FA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B6172347236EE54F006E0FA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B617234A236EE54F006E0FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B617234C236EE550006E0FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B617234F236EE550006E0FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6172351236EE550006E0FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B67143B4236EE75B000BDF62 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		B6925CD3236EF0BA00F539D9 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B6925CD7236EFDDE00F539D9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		C27566E8A33CEB9BCDD30526 /* Pods-imahima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imahima.release.xcconfig"; path = "Target Support Files/Pods-imahima/Pods-imahima.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDBD73400E6D48A3AEC8E24E /* Pods_imahima.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C8035482544F6DE124E7D27 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A0DD17FC7CFD50D6C8C4ED56 /* Pods-imahima.debug.xcconfig */,
+				C27566E8A33CEB9BCDD30526 /* Pods-imahima.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9D6BA6E9263B3BEEB3B9F977 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5102E856062455B964559FF3 /* Pods_imahima.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B6172337236EE54F006E0FA6 = {
 			isa = PBXGroup;
 			children = (
 				B6172342236EE54F006E0FA6 /* imahima */,
 				B6172341236EE54F006E0FA6 /* Products */,
+				5C8035482544F6DE124E7D27 /* Pods */,
+				9D6BA6E9263B3BEEB3B9F977 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,10 +87,12 @@
 				B6172343236EE54F006E0FA6 /* AppDelegate.swift */,
 				B6172345236EE54F006E0FA6 /* SceneDelegate.swift */,
 				B6172347236EE54F006E0FA6 /* ViewController.swift */,
-				B6172349236EE54F006E0FA6 /* Main.storyboard */,
+				B67143B4236EE75B000BDF62 /* SecondViewController.swift */,
+				B6925CD7236EFDDE00F539D9 /* UserDefaults.swift */,
 				B617234C236EE550006E0FA6 /* Assets.xcassets */,
 				B617234E236EE550006E0FA6 /* LaunchScreen.storyboard */,
 				B6172351236EE550006E0FA6 /* Info.plist */,
+				B6925CD3236EF0BA00F539D9 /* Main.storyboard */,
 			);
 			path = imahima;
 			sourceTree = "<group>";
@@ -74,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6172354236EE550006E0FA6 /* Build configuration list for PBXNativeTarget "imahima" */;
 			buildPhases = (
+				77F1CF63C72B88F7F514C9F8 /* [CP] Check Pods Manifest.lock */,
 				B617233C236EE54F006E0FA6 /* Sources */,
 				B617233D236EE54F006E0FA6 /* Frameworks */,
 				B617233E236EE54F006E0FA6 /* Resources */,
+				5B2D6CD9410D4748AF9818F2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,19 +157,63 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6925CD4236EF0BA00F539D9 /* Main.storyboard in Resources */,
 				B6172350236EE550006E0FA6 /* LaunchScreen.storyboard in Resources */,
 				B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */,
-				B617234B236EE54F006E0FA6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B2D6CD9410D4748AF9818F2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-imahima/Pods-imahima-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-imahima/Pods-imahima-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-imahima/Pods-imahima-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77F1CF63C72B88F7F514C9F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-imahima-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B617233C236EE54F006E0FA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B67143B5236EE75B000BDF62 /* SecondViewController.swift in Sources */,
+				B6925CD8236EFDDE00F539D9 /* UserDefaults.swift in Sources */,
 				B6172348236EE54F006E0FA6 /* ViewController.swift in Sources */,
 				B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */,
 				B6172346236EE54F006E0FA6 /* SceneDelegate.swift in Sources */,
@@ -147,14 +223,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B6172349236EE54F006E0FA6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B617234A236EE54F006E0FA6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B617234E236EE550006E0FA6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +350,7 @@
 		};
 		B6172355236EE550006E0FA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0DD17FC7CFD50D6C8C4ED56 /* Pods-imahima.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -290,6 +359,33 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yukigoto.imahima;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -300,6 +396,7 @@
 		};
 		B6172356236EE550006E0FA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C27566E8A33CEB9BCDD30526 /* Pods-imahima.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -308,6 +405,33 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"CoreLocation\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yukigoto.imahima;
 				PRODUCT_NAME = "$(TARGET_NAME)";
