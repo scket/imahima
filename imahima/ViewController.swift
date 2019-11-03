@@ -96,6 +96,10 @@ class ViewController: UIViewController, LoginButtonDelegate {
                 UserDefaults.standard.set(mailAddress, forKey: Const.UserDefaults.kMailAddressKey)
                 UserDefaults.standard.set(pictureUrl, forKey: Const.UserDefaults.kPictureKey)
 				
+				print("name: " + name)
+				print("mail address: " + mailAddress)
+				print("picture: " + pictureUrl)
+				
                 // 画面遷移
                 self.transitionSecondView()
             }
