@@ -13,3 +13,12 @@
     - と思ったけどMain.storyboardにSecondViewControllerのoutletと紐付けしたら画像と名前とアドレス表示できた
     - Facebookログインはこれで一通り完成
   
+### 2019/11/04 shota takeshima
+#### やったこと
+- 起動手順
+  - rootで`pod install`
+  - `***(プロジェクト名).xcworkspace`が出来上がるので、それをXcodeで開いてビルドする
+- segueの調査
+  - エラー文を見ると、swiftのライフサイクルの途中で画面遷移しているのがいけなさそう
+  - `viewDidAppear`で画面遷移を実行させるべきって書いてあったのでいじってみたけど同じエラーがでちゃう…
+    - [swift初心者:画面推移時の「whose view is not in the window hierarchy!」の対処方法](https://qiita.com/Atsushi_/items/604db81a87930d57d50b)
