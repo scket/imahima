@@ -23,3 +23,12 @@
   - `viewDidAppear`で画面遷移を実行させるべきって書いてあったのでいじってみたけど同じエラーがでちゃう…
     - [swift初心者:画面推移時の「whose view is not in the window hierarchy!」の対処方法](https://qiita.com/Atsushi_/items/604db81a87930d57d50b)
     - ただ、ログイン状態をチェックしてログインしてれば`SecondViewController`に遷移はできる
+
+### 2019/11/05 yuki goto
+#### やったこと
+- LaunchScreenが表示されたなかったので試行錯誤
+- なんかよく分からんがstoryboard消して作り直したらできたので適当にロゴ画像追加しといた
+- storyboardのdebugほんとにキツそうなので使いたくない
+- 調べるとやっぱりコンフリクトしたりdebugキツかったり煩雑な処理書きづらかったりでstoryboard使わない派もけっこういるみたい
+- そんな工数かからなさそうだったらstoryboard消したい
+
