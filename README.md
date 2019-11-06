@@ -32,3 +32,8 @@
 - 調べるとやっぱりコンフリクトしたりdebugキツかったり煩雑な処理書きづらかったりでstoryboard使わない派もけっこういるみたい
 - そんな工数かからなさそうだったらstoryboard消したい
 
+## 11/6 オフライン
+#### 次までにやること
+- RootViewControllerの概念を使う
+  - [ここ](https://qiita.com/Riscait/items/29e34d922dad834106da)をほぼコピペしてきて大元を作る
+- ↑でいうところのRootVCとSplachVC以外はStoryBoardと1対1の関係にViewControllerが配置される
