@@ -7,9 +7,14 @@
 //
 
 import Foundation
-import  UIKit
+import UIKit
 
-final class SecondViewController: UIViewController {
+final class MainViewController: UIViewController {
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		print("MainViewController viewDidLoad()")
+	}
 
     /// アイコン画像
     @IBOutlet weak var userImageView: UIImageView! {

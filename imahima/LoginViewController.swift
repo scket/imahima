@@ -9,18 +9,13 @@
 import UIKit
 import FBSDKLoginKit
 
-class ViewController: UIViewController, LoginButtonDelegate {
-
-//	override func viewDidLoad() {
-//		super.viewDidLoad()
-//		// Do any additional setup after loading the view.
-//	}
-	
+class LoginViewController: UIViewController, LoginButtonDelegate {
     // ユーザープロフィール
     var userProfile : NSDictionary = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		print("LoginViewController viewDidLoad()")
 
         // Facebookログイン用ボタンがSDKに用意されている
         let facebookLoginButton = FBLoginButton()
@@ -28,13 +23,10 @@ class ViewController: UIViewController, LoginButtonDelegate {
         facebookLoginButton.permissions = ["public_profile", "email"]
         facebookLoginButton.center = self.view.center
         facebookLoginButton.delegate = self
-        self.view.addSubview(facebookLoginButton)
-
-        // ログイン済みかチェック
-        checkloginFacebook()
+        view.addSubview(facebookLoginButton)
     }
 
-    /// ログインコールバック
+    // ログインコールバック
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         // エラーチェック
         if error == nil {
@@ -51,30 +43,18 @@ class ViewController: UIViewController, LoginButtonDelegate {
         }
     }
 
-    /// ログアウトコールバック
+    // ログアウトコールバック
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("Logout")
     }
 
-    /// ログイン済みかチェック
-    func checkloginFacebook() {
-        if let _ = AccessToken.current {
-            print("Logged in")
-
-        } else {
-            print("Not Logged in")
-        }
-    }
-
     // 参考：SwiftでFacebookログインと情報取得の覚書
     // https://qiita.com/noranoko/items/e1406cdd957f439db066
-    /// ユーザー情報を取得
+    // ユーザー情報を取得
     func saveUserData() {
-
         let graphRequest : GraphRequest =
             GraphRequest(graphPath: "me",
                          parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
-
         graphRequest.start(completionHandler: { (connection, result, error) -> Void in
             if ((error) != nil) {
                 print("Error: \(String(describing: error))")
@@ -99,17 +79,13 @@ class ViewController: UIViewController, LoginButtonDelegate {
 				print("name: " + name)
 				print("mail address: " + mailAddress)
 				print("picture: " + pictureUrl)
-				
-                // 画面遷移
-                self.transitionSecondView()
             }
         })
     }
-
-    /// 画面遷移
-    func transitionSecondView() {
-        self.performSegue(withIdentifier: "segue", sender: nil)
-    }
-
+	
+	func transitionToMain() {
+		AppDelegate.shared.rootViewController.transitionToMain()
+	}
+	
 }
 

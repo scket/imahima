@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172343236EE54F006E0FA6 /* AppDelegate.swift */; };
 		B6172346236EE54F006E0FA6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172345236EE54F006E0FA6 /* SceneDelegate.swift */; };
-		B6172348236EE54F006E0FA6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172347236EE54F006E0FA6 /* ViewController.swift */; };
+		B6172348236EE54F006E0FA6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172347236EE54F006E0FA6 /* LoginViewController.swift */; };
 		B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B617234C236EE550006E0FA6 /* Assets.xcassets */; };
 		B631C3112371B8FA00DE988A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B631C3102371B8FA00DE988A /* LaunchScreen.storyboard */; };
 		B631C3152371BE4400DE988A /* SplashImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B631C3142371BE4400DE988A /* SplashImage.png */; };
-		B67143B5236EE75B000BDF62 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67143B4236EE75B000BDF62 /* SecondViewController.swift */; };
+		B631C317237460E000DE988A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631C316237460E000DE988A /* RootViewController.swift */; };
+		B631C3192374631D00DE988A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631C3182374631D00DE988A /* SplashViewController.swift */; };
+		B631C31B2374663700DE988A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B631C31A2374663700DE988A /* Login.storyboard */; };
+		B67143B5236EE75B000BDF62 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67143B4236EE75B000BDF62 /* MainViewController.swift */; };
 		B6925CD4236EF0BA00F539D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6925CD3236EF0BA00F539D9 /* Main.storyboard */; };
 		B6925CD8236EFDDE00F539D9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6925CD7236EFDDE00F539D9 /* UserDefaults.swift */; };
 		FDBD73400E6D48A3AEC8E24E /* Pods_imahima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5102E856062455B964559FF3 /* Pods_imahima.framework */; };
@@ -25,12 +28,15 @@
 		B6172340236EE54F006E0FA6 /* imahima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imahima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6172343236EE54F006E0FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6172345236EE54F006E0FA6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B6172347236EE54F006E0FA6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B6172347236EE54F006E0FA6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B617234C236EE550006E0FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6172351236EE550006E0FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B631C3102371B8FA00DE988A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B631C3142371BE4400DE988A /* SplashImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashImage.png; sourceTree = "<group>"; };
-		B67143B4236EE75B000BDF62 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		B631C316237460E000DE988A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		B631C3182374631D00DE988A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		B631C31A2374663700DE988A /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		B67143B4236EE75B000BDF62 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B6925CD3236EF0BA00F539D9 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		B6925CD7236EFDDE00F539D9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		C27566E8A33CEB9BCDD30526 /* Pods-imahima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imahima.release.xcconfig"; path = "Target Support Files/Pods-imahima/Pods-imahima.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,15 +93,18 @@
 			isa = PBXGroup;
 			children = (
 				B6172343236EE54F006E0FA6 /* AppDelegate.swift */,
+				B631C3182374631D00DE988A /* SplashViewController.swift */,
 				B6172345236EE54F006E0FA6 /* SceneDelegate.swift */,
-				B6172347236EE54F006E0FA6 /* ViewController.swift */,
-				B67143B4236EE75B000BDF62 /* SecondViewController.swift */,
+				B6172347236EE54F006E0FA6 /* LoginViewController.swift */,
+				B631C316237460E000DE988A /* RootViewController.swift */,
+				B67143B4236EE75B000BDF62 /* MainViewController.swift */,
 				B6925CD7236EFDDE00F539D9 /* UserDefaults.swift */,
 				B617234C236EE550006E0FA6 /* Assets.xcassets */,
 				B6172351236EE550006E0FA6 /* Info.plist */,
 				B6925CD3236EF0BA00F539D9 /* Main.storyboard */,
 				B631C3142371BE4400DE988A /* SplashImage.png */,
 				B631C3102371B8FA00DE988A /* LaunchScreen.storyboard */,
+				B631C31A2374663700DE988A /* Login.storyboard */,
 			);
 			path = imahima;
 			sourceTree = "<group>";
@@ -163,6 +172,7 @@
 				B631C3152371BE4400DE988A /* SplashImage.png in Resources */,
 				B631C3112371B8FA00DE988A /* LaunchScreen.storyboard in Resources */,
 				B6925CD4236EF0BA00F539D9 /* Main.storyboard in Resources */,
+				B631C31B2374663700DE988A /* Login.storyboard in Resources */,
 				B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,10 +226,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B67143B5236EE75B000BDF62 /* SecondViewController.swift in Sources */,
+				B67143B5236EE75B000BDF62 /* MainViewController.swift in Sources */,
 				B6925CD8236EFDDE00F539D9 /* UserDefaults.swift in Sources */,
-				B6172348236EE54F006E0FA6 /* ViewController.swift in Sources */,
+				B631C317237460E000DE988A /* RootViewController.swift in Sources */,
+				B6172348236EE54F006E0FA6 /* LoginViewController.swift in Sources */,
 				B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */,
+				B631C3192374631D00DE988A /* SplashViewController.swift in Sources */,
 				B6172346236EE54F006E0FA6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
