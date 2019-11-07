@@ -37,3 +37,13 @@
 - RootViewControllerの概念を使う
   - [ここ](https://qiita.com/Riscait/items/29e34d922dad834106da)をほぼコピペしてきて大元を作る
 - ↑でいうところのRootVCとSplachVC以外はStoryBoardと1対1の関係にViewControllerが配置される
+
+### 2019/11/07 yuki goto
+#### やったこと
+- RootViewControllerをいれてみた
+- LoginVCのlabelが表示されず？見た目ではsplash -> main のような挙動
+- log仕込んでみたらちゃんとLoginVCはsplashから遷移しているぽい
+- MainVCのインスタンスをとっていない(transitionToMain()を呼んでいない)はずなのにMianVCのviewDidLoad()が走ってる
+- Main.storyboardが特別扱いぽいのでHomeに名前変えてみたらMainがありませんって怒られる．．．
+- 常にRootVCでviewを管理したいのに，Main.storyboardのviewが前にきてる感じする
+
