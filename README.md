@@ -47,3 +47,12 @@
 - Main.storyboardが特別扱いぽいのでHomeに名前変えてみたらMainがありませんって怒られる．．．
 - 常にRootVCでviewを管理したいのに，Main.storyboardのviewが前にきてる感じする
 
+### 2019/11/09 shota takeshima
+#### やったこと
+- 画像ファイル系をassets以下に移動
+  - `Assets.xacassets`以下でimageを管理するっぽい
+- SplashVCのグルグルが出てこないのが気になる(まだ直せてない)
+- RootVC経由の初期遷移でMainに行かないように修正
+  - infoの設定を修正する必要があった
+  - LoginVCとMainVCに遷移できるようになったが、画面が真っ暗で表示されちゃう(調査中)
+
