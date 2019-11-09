@@ -10,7 +10,7 @@
         <!--Login View Controller-->
         <scene sceneID="uxC-Nb-DeP">
             <objects>
-                <viewController id="J5V-uN-huz" customClass="LoginViewController" customModule="imahima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginScene" id="J5V-uN-huz" customClass="LoginViewController" customModule="imahima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gjB-27-7lh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

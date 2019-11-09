@@ -14,7 +14,7 @@ final class SplashViewController: UIViewController {
 	private lazy var activityIndicator: UIActivityIndicatorView = {
 		let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
 		indicator.frame = view.bounds
-		indicator.backgroundColor = UIColor(white: 0, alpha: 0.4)
+        indicator.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
 		return indicator
 	}()
 
@@ -22,7 +22,7 @@ final class SplashViewController: UIViewController {
 	// LaunchScreenでも同じ画像を指定
 	private lazy var splashImage: UIImageView = {
 		let imageView = UIImageView(
-			image: UIImage(named: "SplashImage.png")
+			image: UIImage(named: "SplashImage")
 		)
 		imageView.contentMode = .scaleAspectFill
 		imageView.frame = view.frame
@@ -39,7 +39,7 @@ final class SplashViewController: UIViewController {
         activityIndicator.startAnimating()
 		
 		// FBログインで分岐
-		if checkloginFacebook() {
+		if !checkloginFacebook() {
 			// ログイン済みであればホーム画面へ遷移
 			print("Already logged in")
 			AppDelegate.shared.rootViewController.transitionToMain()

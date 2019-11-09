@@ -64,7 +64,7 @@ final class RootViewController: UIViewController {
     // ログイン画面への遷移
     func transitionToLogin() {
         // 切り替えたい先のViewControllerを用意
-        let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
+        let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "LoginScene")
         transition(to: vc)
     }
 }
