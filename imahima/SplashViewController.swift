@@ -39,7 +39,7 @@ final class SplashViewController: UIViewController {
         activityIndicator.startAnimating()
 		
 		// FBログインで分岐
-		if !checkloginFacebook() {
+		if checkloginFacebook() {
 			// ログイン済みであればホーム画面へ遷移
 			print("Already logged in")
 			AppDelegate.shared.rootViewController.transitionToMain()
