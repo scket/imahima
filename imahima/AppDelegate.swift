@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        print("appdeligate")
         // 起動時にRootViewControllerをrootViewControllerに設定する
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = RootViewController()
@@ -27,7 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
+        print("applicationDidBecomeActive")
         AppEvents.activateApp()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("applicationDidEnterBackground")
+        // 起動時にRootViewControllerをrootViewControllerに設定する
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window!.rootViewController = RootViewController()
+        window!.makeKeyAndVisible()
     }
 	
 }

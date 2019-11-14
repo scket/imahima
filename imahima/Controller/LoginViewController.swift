@@ -37,6 +37,8 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
             } else {
                 // ユーザープロフィールを保存
                 self.saveUserData()
+                
+                self.transitionToMain();
             }
         } else {
             print("Login　Error")
