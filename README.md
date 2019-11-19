@@ -56,3 +56,12 @@
   - infoの設定を修正する必要があった
   - LoginVCとMainVCに遷移できるようになったが、画面が真っ暗で表示されちゃう(調査中)
 
+### 2019/11/19 yuki goto
+#### やったこと
+- FBLoginButton()の挙動がおかしかったので改めて[公式のドキュメント](https://developers.facebook.com/docs/swift)見直した
+- AppDelegateの↓２つのfunctionでFBSDKをinitializeする必要があるとのこと
+  - ```func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool```
+  - ```func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool```
+- ↑の修正によってログイン/ログアウトがAccessTokenのnil?と同じ表示になることが確認できた
+- LogoutViewControllerとか作ったけど```LoginButtonDelegate```のクラスはcallback必須ぽいのでひとつにまとめればいいかな
+- Logout後の遷移はまだ書いてない
