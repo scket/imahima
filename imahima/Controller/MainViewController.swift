@@ -14,6 +14,8 @@ class MainViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		print("MainViewController viewDidLoad()")
+		
+		
 	}
 
     /// アイコン画像
@@ -48,4 +50,14 @@ class MainViewController: UIViewController {
         }
     }
 	
+	@IBOutlet weak var button: UIButton!
+	
+	@IBAction func button(_ sender: UIButton) {
+		print("logout button tapped!")
+		self.transitionToLogout()
+	}
+	
+	func transitionToLogout() {
+		AppDelegate.shared.rootViewController.transitionToLogout()
+	}
 }

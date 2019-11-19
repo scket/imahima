@@ -16,15 +16,15 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 		print("LoginViewController viewDidLoad()")
-
+	
         // Facebookログイン用ボタンがSDKに用意されている
-        let facebookLoginButton = FBLoginButton()
+		let facebookLoginButton = FBLoginButton()
         // アクセス許可
         facebookLoginButton.permissions = ["public_profile", "email"]
         facebookLoginButton.center = self.view.center
         facebookLoginButton.delegate = self
         view.addSubview(facebookLoginButton)
-    }
+	}
 
     // ログインコールバック
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
@@ -37,7 +37,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
             } else {
                 // ユーザープロフィールを保存
                 self.saveUserData()
-                
                 self.transitionToMain();
             }
         } else {
@@ -88,6 +87,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
 	func transitionToMain() {
 		AppDelegate.shared.rootViewController.transitionToMain()
 	}
-	
+
 }
 

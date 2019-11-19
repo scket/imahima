@@ -24,14 +24,15 @@ final class RootViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // currentのViewControllerをRootVCの子VCとして追加
+		
+		current = SplashViewController()
         addChild(current)
         current.view.frame = view.bounds
         view.addSubview(current.view)
         current.didMove(toParent: self)
 		print("RootViewController viewDidLoad(). Cuurent is "
 			+ String(describing: type(of: current)))
+
     }
 	
     // RootVCの子VCを入れ替える＝ルートの画面を切り替える
@@ -64,13 +65,15 @@ final class RootViewController: UIViewController {
     // ログイン画面への遷移
     func transitionToLogin() {
         // 切り替えたい先のViewControllerを用意
-        let new = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController() as! LoginViewController
-        //transition(to: vc)
-        addChild(new)
-        new.view.frame = view.bounds
-        view.addSubview(new.view)
-        new.didMove(toParent: self)
-        replaceCurrent(for: new)
+        let vc = UIStoryboard(name: "Login", bundle: nil).instantiateInitialViewController()!
+		transition(to: vc)
+    }
+	
+    // ログアウト画面への遷移
+    func transitionToLogout() {
+        // 切り替えたい先のViewControllerを用意
+        let vc = UIStoryboard(name: "Logout", bundle: nil).instantiateInitialViewController()!
+		transition(to: vc)
     }
     
     private func replaceCurrent(for new: UIViewController) {
@@ -78,6 +81,5 @@ final class RootViewController: UIViewController {
         current.view.removeFromSuperview()
         current.removeFromParent()
         current = new
-    
     }
 }

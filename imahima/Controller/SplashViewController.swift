@@ -38,24 +38,31 @@ final class SplashViewController: UIViewController {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
 		
-		// FBログインで分岐
-		if (checkloginFacebook()) {
-			// ログイン済みであればホーム画面へ遷移
-			print("Already logged in")
-			AppDelegate.shared.rootViewController.transitionToMain()
+		/// ログイン済みかチェック
+		if (self.checkLoginFacebook()) {
+				print("Already Logged in. Go MainVeiwController.")
+				self.transitionToMain()
 		} else {
-			// ログイン済みでなければログイン画面へ遷移
-			print("Not logged in")
-			AppDelegate.shared.rootViewController.transitionToLogin()
+				print("Not Logged in.")
+				self.transitionToLogin()
 		}
     }
 	
     /// ログイン済みかチェック
-    func checkloginFacebook() -> Bool {
+    func checkLoginFacebook() -> Bool {
         if let _ = AccessToken.current {
             return true
         } else {
+			AccessToken.initialize()
             return false
         }
     }
+	
+	func transitionToMain() {
+		AppDelegate.shared.rootViewController.transitionToMain()
+	}
+	
+	func transitionToLogin() {
+		AppDelegate.shared.rootViewController.transitionToLogin()
+	}
 }

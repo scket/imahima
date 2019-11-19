@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FBSDKCoreKit
+import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,18 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        print("appdeligate")
+		
+		ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+		
+        print("appdeligate didFinishLaunchingWithOptions")
         // 起動時にRootViewControllerをrootViewControllerに設定する
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = RootViewController()
         window!.makeKeyAndVisible()
         return true
     }
-
-    func application(_ application: UIApplication,open url: URL,sourceApplication: String?,annotation: Any) -> Bool {
-        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-    }
+	
+	func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+		if ApplicationDelegate.shared.application(app, open: url, options: options) {
+			return true
+		}
+		return false
+	}
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("applicationDidBecomeActive")
@@ -35,10 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("applicationDidEnterBackground")
-        // 起動時にRootViewControllerをrootViewControllerに設定する
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window!.rootViewController = RootViewController()
-        window!.makeKeyAndVisible()
     }
 	
 }

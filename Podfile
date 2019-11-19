@@ -6,5 +6,7 @@ target 'imahima' do
   use_frameworks!
 
   # Pods for imahima
-pod 'FBSDKLoginKit'
+pod 'FacebookCore'
+pod 'FacebookLogin'
+pod 'FacebookShare'
 end

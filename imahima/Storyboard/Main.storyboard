@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uLC-Ss-3Q5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,11 +40,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sni-An-foM">
+                                <rect key="frame" x="109" y="786" width="217" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="button:" destination="uLC-Ss-3Q5" eventType="touchUpInside" id="irA-N4-o9K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="z3o-7y-TTh"/>
                     </view>
                     <connections>
+                        <outlet property="button" destination="Sni-An-foM" id="LdY-KC-0cN"/>
                         <outlet property="mailAddressLabel" destination="PyM-an-UtL" id="GGy-tQ-4r1"/>
                         <outlet property="nameLabel" destination="dT9-8S-96q" id="un7-Eb-Cgv"/>
                         <outlet property="userImageView" destination="iWh-bq-tyk" id="6hJ-yv-tCi"/>
@@ -52,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gi0-nO-Xkx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="217" y="129"/>
+            <point key="canvasLocation" x="215.94202898550725" y="128.57142857142856"/>
         </scene>
     </scenes>
 </document>
