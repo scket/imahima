@@ -5,6 +5,7 @@
 #### やったこと
 - LogoutViewControllerのlogoutコールバックからLoginViewControllerへ遷移させるようにした
 - Splash -> Login -> Main -> Logout -> Login -> Main -> Logtout -> Login・・・ のループができることを確認した
+- LoginViewControllerにAPIを叩いてUserDefaultsにユーザ情報を保存するロジックが入っていたのでServiceクラスに分離した
 
 ### 2019/11/19 yuki goto
 #### やったこと
