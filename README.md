@@ -1,6 +1,11 @@
 # imahima
 
 ## memo
+### 2019/11/20 yuki goto
+#### やったこと
+- LogoutViewControllerのlogoutコールバックからLoginViewControllerへ遷移させるようにした
+- Splash -> Login -> Main -> Logout -> Login -> Main -> Logtout -> Login・・・ のループができることを確認した
+
 ### 2019/11/19 yuki goto
 #### やったこと
 - FBLoginButton()の挙動がおかしかったので改めて[公式のドキュメント](https://developers.facebook.com/docs/swift)見直した
