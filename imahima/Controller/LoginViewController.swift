@@ -45,10 +45,11 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
     }
 
     // ログアウトコールバック
+	// 実際にここに入ることはないはず
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("Logout")
     }
-
+	
     // 参考：SwiftでFacebookログインと情報取得の覚書
     // https://qiita.com/noranoko/items/e1406cdd957f439db066
     // ユーザー情報を取得

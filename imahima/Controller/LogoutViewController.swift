@@ -10,29 +10,30 @@ import UIKit
 import FBSDKLoginKit
 
 class LogoutViewController: UIViewController, LoginButtonDelegate {
-	
-	func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-		print("aaa")
-	}
-	
-	// ユーザープロフィール
-	var userProfile : NSDictionary = [:]
 
 	override func viewDidLoad() {
-	super.viewDidLoad()
-	print("LogoutViewController viewDidLoad()")
+		super.viewDidLoad()
+		print("LogoutViewController viewDidLoad()")
 
-	// Facebookログイン用ボタンがSDKに用意されている
-	let facebookLoginButton = FBLoginButton()
-	// アクセス許可
-	facebookLoginButton.permissions = ["public_profile", "email"]
-	facebookLoginButton.center = self.view.center
-	facebookLoginButton.delegate = self
-	view.addSubview(facebookLoginButton)
+		let facebookLoginButton = FBLoginButton()
+		facebookLoginButton.permissions = ["public_profile", "email"]
+		facebookLoginButton.center = self.view.center
+		facebookLoginButton.delegate = self
+		view.addSubview(facebookLoginButton)
 	}
 	
     // ログアウトコールバック
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        print("Logout")
+		self.transitionToLogin()
     }
+	
+	// ログアウトエラーコールバック
+	func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+		self.transitionToLogin()
+	}
+	
+	func transitionToLogin() {
+		AppDelegate.shared.rootViewController.transitionToLogin()
+	}
+
 }
