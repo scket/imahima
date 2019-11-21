@@ -17,9 +17,9 @@
 		AB806673237D767C00292033 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB806672237D767C00292033 /* UserDefaults.swift */; };
 		B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172343236EE54F006E0FA6 /* AppDelegate.swift */; };
 		B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B617234C236EE550006E0FA6 /* Assets.xcassets */; };
-		B6304384237EB31700BFE13E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6304383237EB31700BFE13E /* Extension.swift */; };
 		B630438623842CD000BFE13E /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630438523842CD000BFE13E /* LogoutViewController.swift */; };
 		B630438823842DF300BFE13E /* Logout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B630438723842DF300BFE13E /* Logout.storyboard */; };
+		B630438D23857AB200BFE13E /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630438C23857AB200BFE13E /* UserProfileService.swift */; };
 		FDBD73400E6D48A3AEC8E24E /* Pods_imahima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5102E856062455B964559FF3 /* Pods_imahima.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,9 +38,9 @@
 		B6172343236EE54F006E0FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B617234C236EE550006E0FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6172351236EE550006E0FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B6304383237EB31700BFE13E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B630438523842CD000BFE13E /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		B630438723842DF300BFE13E /* Logout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Logout.storyboard; sourceTree = "<group>"; };
+		B630438C23857AB200BFE13E /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		C27566E8A33CEB9BCDD30526 /* Pods-imahima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imahima.release.xcconfig"; path = "Target Support Files/Pods-imahima/Pods-imahima.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				AB806672237D767C00292033 /* UserDefaults.swift */,
+				B630438C23857AB200BFE13E /* UserProfileService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,7 +130,6 @@
 				AB806668237D767300292033 /* Controller */,
 				AB806661237D766900292033 /* Storyboard */,
 				B6172343236EE54F006E0FA6 /* AppDelegate.swift */,
-				B6304383237EB31700BFE13E /* Extension.swift */,
 				B617234C236EE550006E0FA6 /* Assets.xcassets */,
 				B6172351236EE550006E0FA6 /* Info.plist */,
 			);
@@ -255,9 +255,9 @@
 			files = (
 				AB80666E237D767300292033 /* MainViewController.swift in Sources */,
 				AB80666D237D767300292033 /* RootViewController.swift in Sources */,
-				B6304384237EB31700BFE13E /* Extension.swift in Sources */,
 				AB806673237D767C00292033 /* UserDefaults.swift in Sources */,
 				B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */,
+				B630438D23857AB200BFE13E /* UserProfileService.swift in Sources */,
 				AB806670237D767300292033 /* LoginViewController.swift in Sources */,
 				B630438623842CD000BFE13E /* LogoutViewController.swift in Sources */,
 				AB80666F237D767300292033 /* SplashViewController.swift in Sources */,
