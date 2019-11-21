@@ -39,7 +39,7 @@ final class SplashViewController: UIViewController {
         activityIndicator.startAnimating()
 		
 		/// ログイン済みかチェック
-		if (self.checkLoginFacebook()) {
+		if (!self.checkLoginFacebook()) {
 				print("Already Logged in. Go MainVeiwController.")
 				self.transitionToMain()
 		} else {
