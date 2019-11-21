@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
 		print("LoginViewController viewDidLoad()")
 		let facebookLoginButton = FBLoginButton()
         // アクセス許可
-        facebookLoginButton.permissions = ["public_profile", "email"]
+        facebookLoginButton.permissions = ["public_profile", "email", "user_friends"]
         facebookLoginButton.center = self.view.center
         facebookLoginButton.delegate = self
         view.addSubview(facebookLoginButton)

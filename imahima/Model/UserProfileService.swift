@@ -21,6 +21,7 @@ class UserProfileService {
             } else {
                 // APIのレスポンスをuserProfileに入れる
                 let userProfile = (result as! NSDictionary)
+				print(userProfile)
 				
 				let id: String = userProfile.object(forKey: "id") as? String ?? ""
                 let name: String = userProfile.object(forKey: "name") as? String ?? ""
