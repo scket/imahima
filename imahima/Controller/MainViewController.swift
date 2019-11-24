@@ -14,12 +14,14 @@ class MainViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		print("MainViewController viewDidLoad()")
+		let userFriendsService = UserFriendsService()
+		userFriendsService.getUserFriends()
 	}
 
     /// アイコン画像
     @IBOutlet weak var userImageView: UIImageView! {
         didSet {
-            if let pictureUrl = UserDefaults.standard.object(forKey: Const.UserDefaults.kPictureKey) {
+            if let pictureUrl = UserDefaults.standard.object(forKey: Const.UserDefaults.pictureKey) {
                 do {
                     let pictureUrlString = pictureUrl as! String
                     if let url = URL(string: pictureUrlString) {
@@ -37,14 +39,14 @@ class MainViewController: UIViewController {
     /// ユーザー名
     @IBOutlet weak var nameLabel: UILabel! {
         didSet {
-            self.nameLabel.text = (UserDefaults.standard.object(forKey: Const.UserDefaults.kUserNameKey)) as? String
+			self.nameLabel.text = UserDefaults.standard.string(forKey: Const.UserDefaults.userNameKey)
         }
     }
 
     /// メールアドレス
     @IBOutlet weak var mailAddressLabel: UILabel! {
         didSet {
-            self.mailAddressLabel.text = (UserDefaults.standard.object(forKey: Const.UserDefaults.kMailAddressKey)) as? String
+            self.mailAddressLabel.text = (UserDefaults.standard.object(forKey: Const.UserDefaults.mailAddressKey)) as? String
         }
     }
 	

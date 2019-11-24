@@ -1,10 +1,18 @@
 # imahima
 
 ## memo
+### 2019/11/20 shota takeshima
+#### やったこと
+- ログイン周りの動きを確認
+- Main.storyboardにUIStackViewを利用して、デバイスごとに均等に表示されるよう制約を追加
+- 遷移で[UINavigationController](https://qiita.com/ryu1_f/items/4a0e452e94c9ba609220)を使うのがデフォルトっぽいので調査中
+  - 横からスライド、モーダルっぽく遷移が実現できるはず
+
 ### 2019/11/20 yuki goto
 #### やったこと
 - LogoutViewControllerのlogoutコールバックからLoginViewControllerへ遷移させるようにした
 - Splash -> Login -> Main -> Logout -> Login -> Main -> Logtout -> Login・・・ のループができることを確認した
+- LoginViewControllerにAPIを叩いてUserDefaultsにユーザ情報を保存するロジックが入っていたのでServiceクラスに分離した
 
 ### 2019/11/19 yuki goto
 #### やったこと

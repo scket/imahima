@@ -8,13 +8,16 @@
 
 import Foundation
 
+// UserDefaultsのkey管理
 struct Const {
     struct UserDefaults {
+		/// ID
+		static let idKey: String = "id"
         /// ユーザー名
-        static let kUserNameKey: String =  "UserNameKey"
+        static let userNameKey: String =  "userName"
         /// メールアドレス
-        static let kMailAddressKey: String = "MailAddressKey"
+        static let mailAddressKey: String = "mailAddress"
         /// アイコン画像
-        static let kPictureKey: String =  "PictureKey"
+        static let pictureKey: String =  "picture"
     }
 }
