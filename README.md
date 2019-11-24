@@ -1,6 +1,14 @@
 # imahima
 
 ## memo
+### 2019/11/24 shota takeshima
+#### やったこと
+- TabBarControllerの追加
+  - 一旦、「メイン」「チャット」「マイページ」を下部のタブで選択可能にした
+  - 実装の都合上ストーリーボードとVCが1:1にはならない
+  - Splash→Main→Mainの中でVCが分岐(ここではRootVCを経由していない)
+  - https://github.com/scket/imahima/pull/1
+
 ### 2019/11/20 shota takeshima
 #### やったこと
 - ログイン周りの動きを確認
