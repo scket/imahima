@@ -5,8 +5,10 @@ target 'imahima' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
+  pod "Koloda"
+
   # Pods for imahima
-pod 'FacebookCore'
-pod 'FacebookLogin'
-pod 'FacebookShare'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
 end

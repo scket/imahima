@@ -175,7 +175,7 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
 
 + (void)predictEvent:(NSObject *)obj withText:(NSString *)text
 {
-  if (text.length > 100 || text.length == 0) {
+  if (text.length > 100 || text.length == 0 || [FBSDKAppEventsUtility isSensitiveUserData: text]) {
     return;
   }
 
@@ -209,16 +209,19 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
     NSDictionary<NSString *, id> *viewTree = [_viewTrees lastObject];
 
     fb_dispatch_on_default_thread(^{
-      NSString *event = [FBSDKEventInferencer predict:text viewTree:[viewTree mutableCopy] withLog:YES];
+      NSDictionary<NSString *, NSString *> *result = [FBSDKEventInferencer predict:text viewTree:[viewTree mutableCopy] withLog:YES];
+      NSString *event = result[SUGGEST_EVENT_KEY];
       if (!event || [event isEqualToString:SUGGESTED_EVENTS_OTHER]) {
         return;
       }
       if ([_optInEvents containsObject:event]) {
         [FBSDKAppEvents logEvent:event
-                      parameters:@{@"_is_suggested_event": @"1"}];
+                      parameters:@{@"_is_suggested_event": @"1",
+                                   @"_button_text": text
+                      }];
       } else if ([_unconfirmedEvents containsObject:event]) {
         // Only send back not confirmed events to advertisers
-        [self logSuggestedEvent:event withText:text];
+        [self logSuggestedEvent:event withText:text withDenseFeature:result[DENSE_FEATURE_KEY] ?: @""];
       }
     });
   });
@@ -238,9 +241,11 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
   return [textArray componentsJoinedByString:@" "];
 }
 
-+ (void)logSuggestedEvent:(NSString *)event withText:(NSString *)text
++ (void)logSuggestedEvent:(NSString *)event withText:(NSString *)text withDenseFeature:(NSString *)denseFeature
 {
-  NSString *metadata = [FBSDKBasicUtility JSONStringForObject:@{@"button_text": text}
+  NSString *metadata = [FBSDKBasicUtility JSONStringForObject:@{@"button_text": text,
+                                                                @"dense": denseFeature,
+                                                                }
                                                         error:nil
                                          invalidObjectHandler:nil];
   if (!metadata) {

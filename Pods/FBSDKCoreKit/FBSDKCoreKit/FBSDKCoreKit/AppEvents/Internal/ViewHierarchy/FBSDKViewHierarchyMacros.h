@@ -15,8 +15,8 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#ifndef FBSDKCodelessMacros_h
-#define FBSDKCodelessMacros_h
+#ifndef FBSDKViewHierarchyMacros_h
+#define FBSDKViewHierarchyMacros_h
 
 //  keys for event binding path compoenent
 #define CODELESS_MAPPING_METHOD_KEY             @"method"
@@ -95,6 +95,8 @@
 #define VIEW_HIERARCHY_VIEW_KEY                 @"view"
 
 //  keys for suggested events
+#define DENSE_FEATURE_KEY                       @"DENSE_FEATURE"
+#define SUGGEST_EVENT_KEY                       @"SUGGEST_EVENT"
 #define SUGGESTED_EVENTS_OTHER                  @"other"
 
 #endif /* FBSDKCodelessMacros_h */
