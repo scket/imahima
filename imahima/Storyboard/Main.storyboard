@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main-->
+        <!--MyPage-->
         <scene sceneID="Lmp-IV-bmd">
             <objects>
-                <viewController storyboardIdentifier="MainScene" id="uLC-Ss-3Q5" customClass="MainViewController" customModule="imahima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainScene" id="uLC-Ss-3Q5" customClass="MyPageViewController" customModule="imahima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z26-Rh-ohg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,7 +63,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="z3o-7y-TTh"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Main" image="house" catalog="system" id="a1a-Yb-yEQ"/>
+                    <tabBarItem key="tabBarItem" title="MyPage" image="person.fill" catalog="system" id="a1a-Yb-yEQ"/>
                     <connections>
                         <outlet property="button" destination="Sni-An-foM" id="LdY-KC-0cN"/>
                         <outlet property="mailAddressLabel" destination="PyM-an-UtL" id="GGy-tQ-4r1"/>
@@ -75,26 +75,45 @@
             </objects>
             <point key="canvasLocation" x="1154.4000000000001" y="128.18590704647679"/>
         </scene>
-        <!--MyPage-->
+        <!--Main-->
         <scene sceneID="Qc0-VK-5Ft">
             <objects>
-                <viewController id="FOz-ac-gAA" customClass="MyPageViewController" customModule="imahima" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FOz-ac-gAA" customClass="MainViewController" customModule="imahima" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rct-3C-fwY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MyPage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRu-ke-S9s">
-                                <rect key="frame" x="72" y="287" width="225" height="68"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="llJ-0A-1K3">
+                                <rect key="frame" x="69" y="465" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="Nope"/>
+                                <connections>
+                                    <action selector="cardGoToNope" destination="FOz-ac-gAA" eventType="touchUpInside" id="NbN-aC-vrk"/>
+                                    <action selector="cardGoToNope" destination="PCt-du-Hjf" eventType="touchUpInside" id="vLP-St-Kr5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHK-o7-yg0">
+                                <rect key="frame" x="271" y="465" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Like"/>
+                                <connections>
+                                    <action selector="cardGoToLike" destination="PCt-du-Hjf" eventType="touchUpInside" id="C0W-p0-UdO"/>
+                                    <action selector="cardGoToLike" destination="FOz-ac-gAA" eventType="touchUpInside" id="qFr-eF-Wh1"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Of-HD-wTw" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="64" y="93" width="240" height="223"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="fFn-dq-9z6"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="MyPage" image="person.circle" catalog="system" id="Iyh-Ds-3Is"/>
+                    <tabBarItem key="tabBarItem" title="Main" image="house" catalog="system" id="Iyh-Ds-3Is"/>
+                    <connections>
+                        <outlet property="kolodaView" destination="8Of-HD-wTw" id="F2O-ZB-aSB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nzS-kT-Zwg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,19 +126,13 @@
                     <view key="view" contentMode="scaleToFill" id="hh2-iI-MSo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="chatRoom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ka-IJ-vK5">
-                                <rect key="frame" x="86" y="285" width="202" height="97"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="WWD-cv-4mk"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="ChatRoom" image="chart.bar" catalog="system" id="3aU-vL-5AA"/>
+                    <connections>
+                        <outlet property="kolodaView" destination="8Of-HD-wTw" id="hhC-Kj-VTL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bTF-Bm-tGT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -131,13 +144,14 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="PHp-TM-IBw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e1J-EV-PL1">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="uLC-Ss-3Q5" kind="relationship" relationship="viewControllers" id="zgR-gD-16i"/>
-                        <segue destination="PCt-du-Hjf" kind="relationship" relationship="viewControllers" id="orm-Tb-ZGj"/>
                         <segue destination="FOz-ac-gAA" kind="relationship" relationship="viewControllers" id="2Ks-aI-Vmk"/>
+                        <segue destination="PCt-du-Hjf" kind="relationship" relationship="viewControllers" id="orm-Tb-ZGj"/>
+                        <segue destination="uLC-Ss-3Q5" kind="relationship" relationship="viewControllers" id="zgR-gD-16i"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EaT-W8-7Bn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -148,6 +162,6 @@
     <resources>
         <image name="chart.bar" catalog="system" width="64" height="44"/>
         <image name="house" catalog="system" width="64" height="54"/>
-        <image name="person.circle" catalog="system" width="64" height="60"/>
+        <image name="person.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>
