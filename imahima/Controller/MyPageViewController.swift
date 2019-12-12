@@ -13,6 +13,8 @@ class MyPageViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        self.navigationItem.title = "MyPage"
+        
 		print("MyPageViewController viewDidLoad()")
 		let userFriendsService = UserFriendsService()
 		userFriendsService.getUserFriends()

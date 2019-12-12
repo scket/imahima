@@ -17,6 +17,8 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Main"
+        
         kolodaView.dataSource = self
         kolodaView.delegate = self
     }

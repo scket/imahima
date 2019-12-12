@@ -14,6 +14,8 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = "ChatRoom"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,7 +32,11 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
         // 別の画面に遷移
-        self.transitionToChat()
+//        self.transitionToChat()
+        
+        let storyboard: UIStoryboard = UIStoryboard(name: "Chat", bundle: nil)//遷移先のStoryboardを設定
+        let nextView = storyboard.instantiateViewController(withIdentifier: "Chat") as! ChatViewController//遷移先のViewControllerを設定
+        self.navigationController?.pushViewController(nextView, animated: true)//遷移する
     }
     
     func transitionToChat() {
