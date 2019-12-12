@@ -16,39 +16,30 @@ class MyPageViewController: UIViewController {
         self.navigationItem.title = "MyPage"
         
 		print("MyPageViewController viewDidLoad()")
-		let userFriendsService = UserFriendsService()
-		userFriendsService.getUserFriends()
 	}
 
     /// アイコン画像
     @IBOutlet weak var userImageView: UIImageView! {
-        didSet {
-            if let pictureUrl = UserDefaults.standard.object(forKey: Const.UserDefaults.pictureKey) {
-                do {
-                    let pictureUrlString = pictureUrl as! String
-                    if let url = URL(string: pictureUrlString) {
-                        let data = try Data(contentsOf: url)
-                        let image = UIImage(data: data)
-                        self.userImageView.image = image
-                    }
-                } catch let err {
-                    print("Error : \(err.localizedDescription)")
-                }
-            }
-        }
+		didSet{
+			let me: Me = Me.sharedInstance
+			let pictureUrl = me.getPictureUrl()
+			do {
+				if let url = URL(string: pictureUrl) {
+					let data = try Data(contentsOf: url)
+					let image = UIImage(data: data)
+					self.userImageView.image = image
+				}
+			} catch let e {
+				print("Error : \(e.localizedDescription)")
+			}
+		}
     }
 
     /// ユーザー名
     @IBOutlet weak var nameLabel: UILabel! {
         didSet {
-			self.nameLabel.text = UserDefaults.standard.string(forKey: Const.UserDefaults.userNameKey)
-        }
-    }
-
-    /// メールアドレス
-    @IBOutlet weak var mailAddressLabel: UILabel! {
-        didSet {
-            self.mailAddressLabel.text = (UserDefaults.standard.object(forKey: Const.UserDefaults.mailAddressKey)) as? String
+			let me: Me = Me.sharedInstance
+			self.nameLabel.text = me.getName()
         }
     }
 	
