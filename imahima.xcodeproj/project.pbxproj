@@ -16,6 +16,9 @@
 		AB806670237D767300292033 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80666C237D767300292033 /* LoginViewController.swift */; };
 		ABA0D1EB2386B81300362DD6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0D1EA2386B81300362DD6 /* ChatRoomViewController.swift */; };
 		ABA0D1ED2386B82900362DD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0D1EC2386B82900362DD6 /* MainViewController.swift */; };
+		ABDFE78023A1291700B2D84C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABDFE77F23A1291700B2D84C /* Chat.storyboard */; };
+		ABDFE78223A1297200B2D84C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFE78123A1297200B2D84C /* ChatViewController.swift */; };
+		ABDFE78423A12C8400B2D84C /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFE78323A12C8400B2D84C /* MockMessage.swift */; };
 		B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172343236EE54F006E0FA6 /* AppDelegate.swift */; };
 		B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B617234C236EE550006E0FA6 /* Assets.xcassets */; };
 		B630438623842CD000BFE13E /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630438523842CD000BFE13E /* LogoutViewController.swift */; };
@@ -38,6 +41,9 @@
 		AB80666C237D767300292033 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ABA0D1EA2386B81300362DD6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		ABA0D1EC2386B82900362DD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		ABDFE77F23A1291700B2D84C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		ABDFE78123A1297200B2D84C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		ABDFE78323A12C8400B2D84C /* MockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
 		B6172340236EE54F006E0FA6 /* imahima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imahima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6172343236EE54F006E0FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B617234C236EE550006E0FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +92,7 @@
 				B630438723842DF300BFE13E /* Logout.storyboard */,
 				AB806663237D766900292033 /* Main.storyboard */,
 				AB806664237D766900292033 /* Login.storyboard */,
+				ABDFE77F23A1291700B2D84C /* Chat.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -100,6 +107,7 @@
 				B630438523842CD000BFE13E /* LogoutViewController.swift */,
 				ABA0D1EA2386B81300362DD6 /* ChatRoomViewController.swift */,
 				ABA0D1EC2386B82900362DD6 /* MainViewController.swift */,
+				ABDFE78123A1297200B2D84C /* ChatViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -109,6 +117,7 @@
 			children = (
 				B64FEBD923A25FBE005A9BD7 /* MyProfileService.swift */,
 				B630438E23869DB500BFE13E /* UserFriendsService.swift */,
+				ABDFE78323A12C8400B2D84C /* MockMessage.swift */,
 				B64FEBD723A25490005A9BD7 /* User.swift */,
 			);
 			path = Model;
@@ -205,6 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABDFE78023A1291700B2D84C /* Chat.storyboard in Resources */,
 				AB806667237D766A00292033 /* Login.storyboard in Resources */,
 				AB806666237D766900292033 /* Main.storyboard in Resources */,
 				B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */,
@@ -266,12 +276,14 @@
 				ABA0D1EB2386B81300362DD6 /* ChatRoomViewController.swift in Sources */,
 				AB80666D237D767300292033 /* RootViewController.swift in Sources */,
 				B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */,
+				ABDFE78423A12C8400B2D84C /* MockMessage.swift in Sources */,
 				B630438F23869DB500BFE13E /* UserFriendsService.swift in Sources */,
 				AB806670237D767300292033 /* LoginViewController.swift in Sources */,
 				B64FEBD823A25490005A9BD7 /* User.swift in Sources */,
 				ABA0D1ED2386B82900362DD6 /* MainViewController.swift in Sources */,
 				B64FEBDA23A25FBE005A9BD7 /* MyProfileService.swift in Sources */,
 				B630438623842CD000BFE13E /* LogoutViewController.swift in Sources */,
+				ABDFE78223A1297200B2D84C /* ChatViewController.swift in Sources */,
 				AB80666F237D767300292033 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

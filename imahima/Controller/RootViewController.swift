@@ -76,6 +76,13 @@ final class RootViewController: UIViewController {
 		transition(to: vc)
     }
     
+    // チャット画面への遷移
+    func transitionToChat() {
+        // 切り替えたい先のViewControllerを用意
+        let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateInitialViewController()!
+        transition(to: vc)
+    }
+    
     private func replaceCurrent(for new: UIViewController) {
         current.willMove(toParent: nil)
         current.view.removeFromSuperview()
