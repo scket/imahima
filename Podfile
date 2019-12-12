@@ -6,6 +6,9 @@ target 'imahima' do
   use_frameworks!
 
   pod "Koloda"
+  
+  pod 'MessageKit'
+  pod 'MessageInputBar'
 
   # Pods for imahima
   pod 'FacebookCore'

@@ -23,8 +23,14 @@ PODS:
     - FBSDKShareKit/Share (= 5.11.1)
   - FBSDKShareKit/Share (5.11.1):
     - FBSDKCoreKit (~> 5.0)
+  - InputBarAccessoryView (4.2.2)
   - Koloda (5.0):
     - pop (~> 1.0)
+  - MessageInputBar (0.4.1):
+    - MessageInputBar/Core (= 0.4.1)
+  - MessageInputBar/Core (0.4.1)
+  - MessageKit (3.0.0):
+    - InputBarAccessoryView (~> 4.2.2)
   - pop (1.0.12)
 
 DEPENDENCIES:
@@ -32,6 +38,8 @@ DEPENDENCIES:
   - FacebookLogin
   - FacebookShare
   - Koloda
+  - MessageInputBar
+  - MessageKit
 
 SPEC REPOS:
   trunk:
@@ -41,7 +49,10 @@ SPEC REPOS:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
+    - InputBarAccessoryView
     - Koloda
+    - MessageInputBar
+    - MessageKit
     - pop
 
 SPEC CHECKSUMS:
@@ -51,9 +62,12 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: fa3ac4dc9b1afc9ae70b3de4dd704d1b6aeeed0d
   FBSDKLoginKit: 0e4572e0279e477103b57978e3ea05fac1dd673d
   FBSDKShareKit: 2b4435ecb134e2af8a636524e43b7813e3d60a0b
+  InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   Koloda: 75302d21882cc3e274c1561b1155805ea5919dab
+  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
+  MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
 
-PODFILE CHECKSUM: bfbf08070a3b8936010491dd2abea90a741c60c9
+PODFILE CHECKSUM: 8f9c59cbe7cd0fb7d86a92084b0a06088cfbe8d5
 
 COCOAPODS: 1.8.4
