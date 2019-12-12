@@ -29,8 +29,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
                 print("Login　Cancel")
             } else {
                 // ユーザープロフィールを保存
-				let userProfileService = UserProfileService()
-				userProfileService.saveUserData()
+				_ = MyProfileService.getMyProfile()
                 self.transitionToMain()
             }
         } else {

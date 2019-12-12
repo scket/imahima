@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="53" translatesAutoresizingMaskIntoConstraints="NO" id="gpT-iq-cSk">
-                                <rect key="frame" x="67.5" y="98.5" width="240" height="470"/>
+                                <rect key="frame" x="67.5" y="135.5" width="240" height="396.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iWh-bq-tyk">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
@@ -34,17 +34,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyM-an-UtL">
-                                        <rect key="frame" x="0.0" y="366.5" width="240" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="J8j-in-Iue"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sni-An-foM">
-                                        <rect key="frame" x="0.0" y="440" width="240" height="30"/>
+                                        <rect key="frame" x="0.0" y="366.5" width="240" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="5Uy-gi-UHC"/>
                                         </constraints>
@@ -66,7 +57,6 @@
                     <tabBarItem key="tabBarItem" title="MyPage" image="person.fill" catalog="system" id="a1a-Yb-yEQ"/>
                     <connections>
                         <outlet property="button" destination="Sni-An-foM" id="LdY-KC-0cN"/>
-                        <outlet property="mailAddressLabel" destination="PyM-an-UtL" id="GGy-tQ-4r1"/>
                         <outlet property="nameLabel" destination="dT9-8S-96q" id="un7-Eb-Cgv"/>
                         <outlet property="userImageView" destination="iWh-bq-tyk" id="6hJ-yv-tCi"/>
                     </connections>

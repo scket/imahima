@@ -14,15 +14,15 @@
 		AB80666E237D767300292033 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80666A237D767300292033 /* MyPageViewController.swift */; };
 		AB80666F237D767300292033 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80666B237D767300292033 /* SplashViewController.swift */; };
 		AB806670237D767300292033 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80666C237D767300292033 /* LoginViewController.swift */; };
-		AB806673237D767C00292033 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB806672237D767C00292033 /* UserDefaults.swift */; };
 		ABA0D1EB2386B81300362DD6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0D1EA2386B81300362DD6 /* ChatRoomViewController.swift */; };
 		ABA0D1ED2386B82900362DD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0D1EC2386B82900362DD6 /* MainViewController.swift */; };
 		B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172343236EE54F006E0FA6 /* AppDelegate.swift */; };
 		B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B617234C236EE550006E0FA6 /* Assets.xcassets */; };
 		B630438623842CD000BFE13E /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630438523842CD000BFE13E /* LogoutViewController.swift */; };
 		B630438823842DF300BFE13E /* Logout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B630438723842DF300BFE13E /* Logout.storyboard */; };
-		B630438D23857AB200BFE13E /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630438C23857AB200BFE13E /* UserProfileService.swift */; };
 		B630438F23869DB500BFE13E /* UserFriendsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630438E23869DB500BFE13E /* UserFriendsService.swift */; };
+		B64FEBD823A25490005A9BD7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FEBD723A25490005A9BD7 /* User.swift */; };
+		B64FEBDA23A25FBE005A9BD7 /* MyProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FEBD923A25FBE005A9BD7 /* MyProfileService.swift */; };
 		FDBD73400E6D48A3AEC8E24E /* Pods_imahima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5102E856062455B964559FF3 /* Pods_imahima.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,6 @@
 		AB80666A237D767300292033 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		AB80666B237D767300292033 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AB80666C237D767300292033 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		AB806672237D767C00292033 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		ABA0D1EA2386B81300362DD6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		ABA0D1EC2386B82900362DD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B6172340236EE54F006E0FA6 /* imahima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imahima.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,8 +44,9 @@
 		B6172351236EE550006E0FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B630438523842CD000BFE13E /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		B630438723842DF300BFE13E /* Logout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Logout.storyboard; sourceTree = "<group>"; };
-		B630438C23857AB200BFE13E /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		B630438E23869DB500BFE13E /* UserFriendsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriendsService.swift; sourceTree = "<group>"; };
+		B64FEBD723A25490005A9BD7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B64FEBD923A25FBE005A9BD7 /* MyProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileService.swift; sourceTree = "<group>"; };
 		C27566E8A33CEB9BCDD30526 /* Pods-imahima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imahima.release.xcconfig"; path = "Target Support Files/Pods-imahima/Pods-imahima.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,9 +107,9 @@
 		AB806671237D767C00292033 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AB806672237D767C00292033 /* UserDefaults.swift */,
-				B630438C23857AB200BFE13E /* UserProfileService.swift */,
+				B64FEBD923A25FBE005A9BD7 /* MyProfileService.swift */,
 				B630438E23869DB500BFE13E /* UserFriendsService.swift */,
+				B64FEBD723A25490005A9BD7 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,12 +265,12 @@
 				AB80666E237D767300292033 /* MyPageViewController.swift in Sources */,
 				ABA0D1EB2386B81300362DD6 /* ChatRoomViewController.swift in Sources */,
 				AB80666D237D767300292033 /* RootViewController.swift in Sources */,
-				AB806673237D767C00292033 /* UserDefaults.swift in Sources */,
 				B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */,
 				B630438F23869DB500BFE13E /* UserFriendsService.swift in Sources */,
-				B630438D23857AB200BFE13E /* UserProfileService.swift in Sources */,
 				AB806670237D767300292033 /* LoginViewController.swift in Sources */,
+				B64FEBD823A25490005A9BD7 /* User.swift in Sources */,
 				ABA0D1ED2386B82900362DD6 /* MainViewController.swift in Sources */,
+				B64FEBDA23A25FBE005A9BD7 /* MyProfileService.swift in Sources */,
 				B630438623842CD000BFE13E /* LogoutViewController.swift in Sources */,
 				AB80666F237D767300292033 /* SplashViewController.swift in Sources */,
 			);
