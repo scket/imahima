@@ -1,6 +1,13 @@
 # imahima
 
 ## memo
+### 2019/12/11 shota takeshima
+#### 進捗
+- TinderUIの実装
+  - [Koloda](https://github.com/Yalantis/Koloda)を利用
+- チャット機能の実装
+  - [MessageKit](https://github.com/MessageKit/MessageKit)を利用
+
 ### 2019/11/24 shota takeshima
 #### やったこと
 - TabBarControllerの追加
