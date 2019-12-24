@@ -13,7 +13,7 @@ class MyProfileService {
 	
 	init(){}
 	
-    class func getMyProfile() {
+    class func getMyProfile(callback: @escaping (User) -> Void) {
         let graphRequest : GraphRequest =
             GraphRequest(graphPath: "me",
                          parameters: ["fields": "id,name, first_name, last_name, picture.type(large)"])
@@ -30,10 +30,8 @@ class MyProfileService {
                 let data: NSDictionary = picture.object(forKey: "data") as! NSDictionary
                 let pictureUrl: String = data.object(forKey: "url") as! String
 
-				let me: Me = Me.sharedInstance
-				me.saveId(id: id)
-				me.saveName(name: name)
-				me.savePictureUrl(pictureUrl: pictureUrl)
+                let user: User = User(id: id, name: name, pictureUrl: pictureUrl)
+                callback(user)
             }
         })
     }

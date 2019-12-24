@@ -8,28 +8,85 @@
 
 import UIKit
 import Koloda
+import Firebase
+import FirebaseFirestore
 
 class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDelegate {
     @IBOutlet weak var kolodaView: KolodaView!
     
     var imageNameArray = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", ]
-
+    
+    var userArray: Array<User> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Main"
 		
-		let userFriendsService = UserFriendsService()
-		userFriendsService.getUserFriends() { users in
-			for user in users {
-				print(user.id)
-				print(user.name)
-				print(user.pictureUrl)
-			}
-		}
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue")
+        dispatchGroup.enter();
+        dispatchQueue.async(group: dispatchGroup) {
+            self.getUsers(dg: dispatchGroup)
+        }
+        
+//        dispatchQueue.async(group: dispatchGroup) {
+//            self.getUserFriends(dg: dispatchGroup)
+//        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.addUsersCollection()
+        }
         
         kolodaView.dataSource = self
         kolodaView.delegate = self
+    }
+    
+    func getUsers (dg: DispatchGroup) {
+        let dataStore = Firestore.firestore()
+        let me: Me = Me.sharedInstance
+        let users = dataStore.collection("users")
+        let query = users.whereField("id", isEqualTo: me.getId())
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+                if querySnapshot!.documents.count == 1 {
+                    print("only one user data exists. ok")
+                } else {
+                    print("no data exists")
+                }
+            }
+            dg.leave()
+        }
+    }
+    
+    func getUserFriends (dg: DispatchGroup) {
+        let userFriendsService = UserFriendsService()
+        userFriendsService.getUserFriends() { users in
+            for user in users {
+                self.userArray.append(User(id: user.id, name: user.name, pictureUrl: user.pictureUrl))
+            }
+            dg.leave()
+        }
+    }
+    
+    func addUsersCollection () {
+        let dataStore = Firestore.firestore()
+        let me: Me = Me.sharedInstance
+        let timeStamp = Int(Date().timeIntervalSince1970)
+        dataStore.collection("users").addDocument(data: [
+            "id": me.getId(),
+            "time": timeStamp
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
