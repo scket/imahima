@@ -14,6 +14,7 @@
 		AB80666E237D767300292033 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80666A237D767300292033 /* MyPageViewController.swift */; };
 		AB80666F237D767300292033 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80666B237D767300292033 /* SplashViewController.swift */; };
 		AB806670237D767300292033 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB80666C237D767300292033 /* LoginViewController.swift */; };
+		AB8B2F5323B21E3A00190596 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB8B2F5223B21E3A00190596 /* GoogleService-Info.plist */; };
 		ABA0D1EB2386B81300362DD6 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0D1EA2386B81300362DD6 /* ChatRoomViewController.swift */; };
 		ABA0D1ED2386B82900362DD6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0D1EC2386B82900362DD6 /* MainViewController.swift */; };
 		ABDFE78023A1291700B2D84C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABDFE77F23A1291700B2D84C /* Chat.storyboard */; };
@@ -39,6 +40,7 @@
 		AB80666A237D767300292033 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		AB80666B237D767300292033 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AB80666C237D767300292033 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AB8B2F5223B21E3A00190596 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ABA0D1EA2386B81300362DD6 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		ABA0D1EC2386B82900362DD6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		ABDFE77F23A1291700B2D84C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		B6172342236EE54F006E0FA6 /* imahima */ = {
 			isa = PBXGroup;
 			children = (
+				AB8B2F5223B21E3A00190596 /* GoogleService-Info.plist */,
 				AB806671237D767C00292033 /* Model */,
 				AB806668237D767300292033 /* Controller */,
 				AB806661237D766900292033 /* Storyboard */,
@@ -220,6 +223,7 @@
 				B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */,
 				AB806665237D766900292033 /* LaunchScreen.storyboard in Resources */,
 				B630438823842DF300BFE13E /* Logout.storyboard in Resources */,
+				AB8B2F5323B21E3A00190596 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +447,7 @@
 					"\"UIKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yukigoto.imahima;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imahima.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -488,7 +492,7 @@
 					"\"UIKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yukigoto.imahima;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imahima.release;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

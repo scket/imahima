@@ -28,12 +28,28 @@ class LoginViewController: UIViewController, LoginButtonDelegate {
             if result!.isCancelled {
                 print("Login　Cancel")
             } else {
-                // ユーザープロフィールを保存
-				_ = MyProfileService.getMyProfile()
-                self.transitionToMain()
+                let dispatchGroup = DispatchGroup()
+                let dispatchQueue = DispatchQueue(label: "queue")
+                dispatchGroup.enter();
+                dispatchQueue.async(group: dispatchGroup) {
+                    self.getProfile(dg: dispatchGroup)
+                }
+                dispatchGroup.notify(queue: .main) {
+                    self.transitionToMain()
+                }
             }
         } else {
             print("Login　Error")
+        }
+    }
+    
+    func getProfile(dg: DispatchGroup) {
+        _ = MyProfileService.getMyProfile() { user in
+            let me: Me = Me.sharedInstance
+            me.saveId(id: user.id)
+            me.saveName(name: user.name)
+            me.savePictureUrl(pictureUrl: user.pictureUrl)
+            dg.leave()
         }
     }
 

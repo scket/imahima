@@ -41,11 +41,29 @@ final class SplashViewController: UIViewController {
 		/// ログイン済みかチェック
 		if (self.checkLoginFacebook()) {
 				print("Already Logged in. Go MainVeiwController.")
-				self.transitionToMain()
+                let dispatchGroup = DispatchGroup()
+                let dispatchQueue = DispatchQueue(label: "queue")
+                dispatchGroup.enter();
+                dispatchQueue.async(group: dispatchGroup) {
+                    self.getProfile(dg: dispatchGroup)
+                }
+                dispatchGroup.notify(queue: .main) {
+                    self.transitionToMain()
+                }
 		} else {
 				print("Not Logged in.")
 				self.transitionToLogin()
 		}
+    }
+    
+    func getProfile(dg: DispatchGroup) {
+        _ = MyProfileService.getMyProfile() { user in
+            let me: Me = Me.sharedInstance
+            me.saveId(id: user.id)
+            me.saveName(name: user.name)
+            me.savePictureUrl(pictureUrl: user.pictureUrl)
+            dg.leave()
+        }
     }
 	
     /// ログイン済みかチェック
