@@ -18,6 +18,10 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Main"
+		
+		let userFriendsService = UserFriendsService()
+		let users: Array<User> = userFriendsService.getUserFriends()
+		print(users)
         
         kolodaView.dataSource = self
         kolodaView.delegate = self
