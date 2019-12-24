@@ -20,8 +20,13 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
         self.navigationItem.title = "Main"
 		
 		let userFriendsService = UserFriendsService()
-		let users: Array<User> = userFriendsService.getUserFriends()
-		print(users)
+		userFriendsService.getUserFriends() { users in
+			for user in users {
+				print(user.id)
+				print(user.name)
+				print(user.pictureUrl)
+			}
+		}
         
         kolodaView.dataSource = self
         kolodaView.delegate = self
