@@ -14,8 +14,6 @@ import FirebaseFirestore
 class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDelegate {
     @IBOutlet weak var kolodaView: KolodaView!
     
-    var imageNameArray = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg", ]
-    
     var userArray: Array<User> = []
 
     override func viewDidLoad() {
@@ -25,20 +23,19 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: "queue")
         dispatchGroup.enter();
-        dispatchQueue.async(group: dispatchGroup) {
-            self.getUsers(dg: dispatchGroup)
-        }
-        
 //        dispatchQueue.async(group: dispatchGroup) {
-//            self.getUserFriends(dg: dispatchGroup)
+//            self.getUsers(dg: dispatchGroup)
 //        }
         
-        dispatchGroup.notify(queue: .main) {
-            self.addUsersCollection()
+        dispatchQueue.async(group: dispatchGroup) {
+            self.getUserFriends(dg: dispatchGroup)
         }
         
-        kolodaView.dataSource = self
-        kolodaView.delegate = self
+        dispatchGroup.notify(queue: .main) {
+//            self.addUsersCollection()
+			self.kolodaView.dataSource = self
+			self.kolodaView.delegate = self
+        }
     }
     
     func getUsers (dg: DispatchGroup) {
@@ -96,7 +93,7 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     
     //枚数
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-        return imageNameArray.count
+        return userArray.count
     }
     
     //ドラッグのスピード
@@ -104,30 +101,51 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
         return .fast
     }
 
-    
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
+        let screenWidth = self.view.bounds.width
+        let screenHeight = self.view.bounds.height
+		
         let view = UIView()
-        view.frame = CGRect(x:0, y: 0, width: 200, height: 200)
-        view.layer.backgroundColor = UIColor.white.cgColor
+        view.center = CGPoint(x:screenWidth/2, y:screenHeight/2)
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.2
         view.layer.shadowOffset = CGSize(width: 0, height: 1.5)
         
-        // ラベルを表示する.
+		
+        let imageView = UIImageView(frame: koloda.bounds)
+        imageView.contentMode = .scaleAspectFit
+		let pictureUrl = userArray[index].pictureUrl
+        imageView.image = getImageByUrl(url: pictureUrl)
+		
+		view.addSubview(imageView)
+		
         let label = UILabel()
-        label.text = imageNameArray[index]
-        label.sizeToFit()
-        label.center = view.center
-        view.addSubview(label)
-        
+		label.text = userArray[index].name
+		view.addSubview(label)
+		label.frame = CGRect(x:0,y:0,width:200,height:50)
+		label.center = CGPoint(x:screenWidth/2,y:screenHeight/2 - 25)
+		label.textAlignment = NSTextAlignment.center
+		label.sizeToFit()
+		
         return view
     }
+	
+	func getImageByUrl(url: String) -> UIImage{
+		let url = URL(string: url)
+		do {
+			let data = try Data(contentsOf: url!)
+			return UIImage(data: data)!
+		} catch let err {
+			print("Error : \(err.localizedDescription)")
+		}
+		return UIImage()
+	}
     
     // カードを全て消費した時に呼ばれる
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         print("Finish cards.")
         //シャッフル
-        imageNameArray = imageNameArray.shuffled()
+        userArray = userArray.shuffled()
         //リスタート
         koloda.resetCurrentCardIndex()
     }
