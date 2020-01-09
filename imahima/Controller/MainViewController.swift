@@ -122,9 +122,11 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
         let label = UILabel()
 		label.text = userArray[index].name
 		view.addSubview(label)
-		label.frame = CGRect(x:0,y:0,width:200,height:50)
+		label.frame = CGRect(x:0,y:0,width:200,height:100)
 		label.center = CGPoint(x:screenWidth/2,y:screenHeight/2 - 25)
 		label.textAlignment = NSTextAlignment.center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
 		label.sizeToFit()
 		
         return view
