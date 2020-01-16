@@ -14,28 +14,35 @@ import FirebaseFirestore
 class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDelegate {
     @IBOutlet weak var kolodaView: KolodaView!
     
-    var userArray: Array<User> = []
+    var userFriends: Array<User> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Main"
 		
-        let dispatchGroup = DispatchGroup()
-        let dispatchQueue = DispatchQueue(label: "queue")
-        dispatchGroup.enter();
+		// Facebookの友人情報を取得
+		let userFriendsService = UserFriendsService()
+		userFriends = userFriendsService.getUserFriends()
+		
+		self.kolodaView.dataSource = self
+		self.kolodaView.delegate = self
+		
+//        let dispatchGroup = DispatchGroup()
+//        let dispatchQueue = DispatchQueue(label: "queue")
+//        dispatchGroup.enter();
 //        dispatchQueue.async(group: dispatchGroup) {
 //            self.getUsers(dg: dispatchGroup)
 //        }
-        
-        dispatchQueue.async(group: dispatchGroup) {
-            self.getUserFriends(dg: dispatchGroup)
-        }
-        
-        dispatchGroup.notify(queue: .main) {
+//
+//        dispatchQueue.async(group: dispatchGroup) {
+//            self.getUserFriends(dg: dispatchGroup)
+//        }
+//
+//        dispatchGroup.notify(queue: .main) {
 //            self.addUsersCollection()
-			self.kolodaView.dataSource = self
-			self.kolodaView.delegate = self
-        }
+//			self.kolodaView.dataSource = self
+//			self.kolodaView.delegate = self
+//        }
     }
     
     func getUsers (dg: DispatchGroup) {
@@ -55,16 +62,6 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
                 } else {
                     print("no data exists")
                 }
-            }
-            dg.leave()
-        }
-    }
-    
-    func getUserFriends (dg: DispatchGroup) {
-        let userFriendsService = UserFriendsService()
-        userFriendsService.getUserFriends() { users in
-            for user in users {
-                self.userArray.append(User(id: user.id, name: user.name, pictureUrl: user.pictureUrl))
             }
             dg.leave()
         }
@@ -93,7 +90,7 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     
     //枚数
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
-        return userArray.count
+        return userFriends.count
     }
     
     //ドラッグのスピード
@@ -114,13 +111,13 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
 		
         let imageView = UIImageView(frame: koloda.bounds)
         imageView.contentMode = .scaleAspectFit
-		let pictureUrl = userArray[index].pictureUrl
+		let pictureUrl = userFriends[index].pictureUrl
         imageView.image = getImageByUrl(url: pictureUrl)
 		
 		view.addSubview(imageView)
 		
         let label = UILabel()
-		label.text = userArray[index].name
+		label.text = userFriends[index].name
 		view.addSubview(label)
 		label.frame = CGRect(x:0,y:0,width:200,height:100)
 		label.center = CGPoint(x:screenWidth/2,y:screenHeight/2 - 25)
@@ -147,7 +144,7 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         print("Finish cards.")
         //シャッフル
-        userArray = userArray.shuffled()
+        userFriends = userFriends.shuffled()
         //リスタート
         koloda.resetCurrentCardIndex()
     }
