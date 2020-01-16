@@ -8,9 +8,14 @@
 
 import FBSDKCoreKit
 
+/*
+Facebook APIの me/friends エンドポイントの結果を取得するクラス
+リクエストを行うライブラリは非同期処理だが，この結果を後続処理で使うため同期処理にした
+*/
 class UserFriendsService {
-	var users: Array<User> = []
-	func getUserFriends(callback: @escaping (Array<User>) -> Void) {
+	func getUserFriends() -> Array<User> {
+		var keepAlive = true
+		var userFriends: Array<User> = []
         let graphRequest : GraphRequest =
             GraphRequest(graphPath: "me/friends",
 						 parameters: ["fields": "id, first_name, last_name, name, picture.type(large)"])
@@ -28,11 +33,14 @@ class UserFriendsService {
 					let picture: NSDictionary = friendDic.object(forKey: "picture") as! NSDictionary
 					let data: NSDictionary = picture.object(forKey: "data") as! NSDictionary
 					let pictureUrl: String = data.object(forKey: "url") as! String
-					self.users.append(User(id: id, name: name, pictureUrl: pictureUrl))
+					userFriends.append(User(id: id, name: name, pictureUrl: pictureUrl))
 				}
-				return callback(self.users)
+				keepAlive = false
 			}
 		})
+		let runLoop = RunLoop.current
+		while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.1)) {}
+		return userFriends
 	}
 
 }
