@@ -72,18 +72,26 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
         imageView.contentMode = .scaleAspectFit
 		let pictureUrl = userFriends[index].pictureUrl
         imageView.image = getImageByUrl(url: pictureUrl)
-		
 		view.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30.0),
+            imageView.widthAnchor.constraint(equalToConstant: 300.0),
+            imageView.heightAnchor.constraint(equalToConstant: 300.0),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
 		
         let label = UILabel()
 		label.text = userFriends[index].name
 		view.addSubview(label)
 		label.frame = CGRect(x:0,y:0,width:200,height:100)
-		label.center = CGPoint(x:screenWidth/2,y:screenHeight/2 - 25)
-		label.textAlignment = NSTextAlignment.center
+        label.center = CGPoint(x: imageView.bounds.size.width/2,y: imageView.bounds.size.height - 25)
+        label.textAlignment = NSTextAlignment.center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-		label.sizeToFit()
+//		label.sizeToFit()
 		
         return view
     }
