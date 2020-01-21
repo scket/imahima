@@ -39,7 +39,7 @@ class UserFriendsService {
 			}
 		})
 		let runLoop = RunLoop.current
-		while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.1)) {}
+		while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
 		return userFriends
 	}
 

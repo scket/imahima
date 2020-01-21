@@ -23,64 +23,23 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
 		// Facebookの友人情報を取得
 		let userFriendsService = UserFriendsService()
 		userFriends = userFriendsService.getUserFriends()
+	
+		// Facebookの友人のログイン時間をFireStoreから取得
+		var friendsLogin: Array<UserLogin> = []
+		let fireStoreService = FireStoreService()
+		for friend in userFriends {
+			let result: UserLogin = fireStoreService.getUsersById(id: friend.id)
+			if(!result.isEmpty()) {
+				friendsLogin.append(result)
+			}
+		}
+		
+		// TODO ログイン時間でフィルターする
+		// ex. 3時間以内にログインしたユーザのみ表示
 		
 		self.kolodaView.dataSource = self
 		self.kolodaView.delegate = self
 		
-//        let dispatchGroup = DispatchGroup()
-//        let dispatchQueue = DispatchQueue(label: "queue")
-//        dispatchGroup.enter();
-//        dispatchQueue.async(group: dispatchGroup) {
-//            self.getUsers(dg: dispatchGroup)
-//        }
-//
-//        dispatchQueue.async(group: dispatchGroup) {
-//            self.getUserFriends(dg: dispatchGroup)
-//        }
-//
-//        dispatchGroup.notify(queue: .main) {
-//            self.addUsersCollection()
-//			self.kolodaView.dataSource = self
-//			self.kolodaView.delegate = self
-//        }
-    }
-    
-    func getUsers (dg: DispatchGroup) {
-        let dataStore = Firestore.firestore()
-        let me: Me = Me.sharedInstance
-        let users = dataStore.collection("users")
-        let query = users.whereField("id", isEqualTo: me.getId())
-        query.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-                if querySnapshot!.documents.count == 1 {
-                    print("only one user data exists. ok")
-                } else {
-                    print("no data exists")
-                }
-            }
-            dg.leave()
-        }
-    }
-    
-    func addUsersCollection () {
-        let dataStore = Firestore.firestore()
-        let me: Me = Me.sharedInstance
-        let timeStamp = Int(Date().timeIntervalSince1970)
-        dataStore.collection("users").addDocument(data: [
-            "id": me.getId(),
-            "time": timeStamp
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added")
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
