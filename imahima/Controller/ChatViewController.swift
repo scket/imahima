@@ -146,10 +146,24 @@ extension ChatViewController: MessagesDisplayDelegate {
     
     // アイコンをセット
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        // message.sender.displayNameとかで送信者の名前を取得できるので
-        // そこからイニシャルを生成するとよい
-        let avatar = Avatar(initials: "人")
-        avatarView.set(avatar: avatar)
+        // message.sender.displayNameから送信者の名前を取得して、imageを出し分ける
+        let avatar: Avatar
+        
+        let me: Me = Me.sharedInstance
+        let pictureUrl = me.getPictureUrl()
+        
+        if let url = URL(string: pictureUrl) {
+              do {
+                 let imageData = try Data(contentsOf: url)
+                 let image = UIImage(data: imageData)
+                 avatar = Avatar(image: image, initials: "Me")
+              } catch {
+                 avatar = Avatar(image: nil, initials: "人")
+              }
+           } else {
+              avatar = Avatar(image: nil, initials: "人")
+           }
+           avatarView.set(avatar: avatar)
     }
 }
 
