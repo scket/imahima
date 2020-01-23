@@ -66,4 +66,15 @@ class FireStoreService {
             }
         }
     }
+	
+	func setUserLiked (id: String, likedUser: [String: Any]) {
+		let dataStore = Firestore.firestore()
+		dataStore.collection("matching").document(id).setData(likedUser) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added")
+            }
+        }
+	}
 }

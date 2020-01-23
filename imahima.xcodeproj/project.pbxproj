@@ -28,6 +28,7 @@
 		B64FEBD823A25490005A9BD7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FEBD723A25490005A9BD7 /* User.swift */; };
 		B64FEBDA23A25FBE005A9BD7 /* MyProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FEBD923A25FBE005A9BD7 /* MyProfileService.swift */; };
 		B664608723D5DD6100528F62 /* FireStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B664608623D5DD6100528F62 /* FireStoreService.swift */; };
+		B695796023D9BF2500987F39 /* UserLiked.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695795F23D9BF2500987F39 /* UserLiked.swift */; };
 		B6BDA79223D5E30600DF9079 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BDA79123D5E30600DF9079 /* UserLogin.swift */; };
 		FDBD73400E6D48A3AEC8E24E /* Pods_imahima.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5102E856062455B964559FF3 /* Pods_imahima.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,7 @@
 		B64FEBD723A25490005A9BD7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B64FEBD923A25FBE005A9BD7 /* MyProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileService.swift; sourceTree = "<group>"; };
 		B664608623D5DD6100528F62 /* FireStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreService.swift; sourceTree = "<group>"; };
+		B695795F23D9BF2500987F39 /* UserLiked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLiked.swift; sourceTree = "<group>"; };
 		B6BDA79123D5E30600DF9079 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		C27566E8A33CEB9BCDD30526 /* Pods-imahima.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-imahima.release.xcconfig"; path = "Target Support Files/Pods-imahima/Pods-imahima.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +129,7 @@
 				ABDFE78323A12C8400B2D84C /* MockMessage.swift */,
 				B64FEBD723A25490005A9BD7 /* User.swift */,
 				B6BDA79123D5E30600DF9079 /* UserLogin.swift */,
+				B695795F23D9BF2500987F39 /* UserLiked.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			files = (
 				AB80666E237D767300292033 /* MyPageViewController.swift in Sources */,
 				ABA0D1EB2386B81300362DD6 /* ChatRoomViewController.swift in Sources */,
+				B695796023D9BF2500987F39 /* UserLiked.swift in Sources */,
 				AB80666D237D767300292033 /* RootViewController.swift in Sources */,
 				B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */,
 				ABDFE78423A12C8400B2D84C /* MockMessage.swift in Sources */,

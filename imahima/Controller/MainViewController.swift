@@ -15,6 +15,7 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     @IBOutlet weak var kolodaView: KolodaView!
     
     var userFriends: Array<User> = []
+	var likedUser: [String: Any] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,6 +137,9 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
 
     // dragの方向などを設定
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+		if (direction.rawValue == "right") {
+			like(index: index)
+		}
         print(index, direction)
     }
 
@@ -148,4 +152,13 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     @IBAction func cardGoToLike() {
         kolodaView.swipe(.right)
     }
+	
+	func like(index: Int) {
+		self.likedUser.updateValue(userFriends[index].id, forKey: "id")
+		self.likedUser.updateValue(String(Int(Date().timeIntervalSince1970)), forKey: "likedAt")
+		
+		let me: Me = Me.sharedInstance
+		let fireStoreService = FireStoreService()
+		fireStoreService.setUserLiked(id: me.getId(), likedUser: self.likedUser)
+	}
 }
