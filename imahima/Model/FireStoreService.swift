@@ -48,11 +48,14 @@ class FireStoreService {
 		return userLogin
 	}
 	
-    func addUsersCollection () {
+	/**
+	Facebook IDをkeyとしてログイン時間の情報を作成・更新する
+	*/
+    func setUsersCollection () {
         let dataStore = Firestore.firestore()
         let me: Me = Me.sharedInstance
         let timeStamp = Int(Date().timeIntervalSince1970)
-        dataStore.collection("users").addDocument(data: [
+		dataStore.collection("users").document(me.getId()).setData([
             "id": me.getId(),
             "time": timeStamp
         ]) { err in

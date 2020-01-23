@@ -20,13 +20,16 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
         super.viewDidLoad()
         self.navigationItem.title = "Main"
 		
+		// 自分のログイン情報を非同期で更新
+		let fireStoreService = FireStoreService()
+		fireStoreService.setUsersCollection()
+		
 		// Facebookの友人情報を取得
 		let userFriendsService = UserFriendsService()
 		userFriends = userFriendsService.getUserFriends()
 	
 		// Facebookの友人のログイン時間をFireStoreから取得
 		var friendsLogin: Array<UserLogin> = []
-		let fireStoreService = FireStoreService()
 		for friend in userFriends {
 			let result: UserLogin = fireStoreService.getUsersById(id: friend.id)
 			if(!result.isEmpty()) {
