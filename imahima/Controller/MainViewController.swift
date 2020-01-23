@@ -23,64 +23,23 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
 		// Facebookの友人情報を取得
 		let userFriendsService = UserFriendsService()
 		userFriends = userFriendsService.getUserFriends()
+	
+		// Facebookの友人のログイン時間をFireStoreから取得
+		var friendsLogin: Array<UserLogin> = []
+		let fireStoreService = FireStoreService()
+		for friend in userFriends {
+			let result: UserLogin = fireStoreService.getUsersById(id: friend.id)
+			if(!result.isEmpty()) {
+				friendsLogin.append(result)
+			}
+		}
+		
+		// TODO ログイン時間でフィルターする
+		// ex. 3時間以内にログインしたユーザのみ表示
 		
 		self.kolodaView.dataSource = self
 		self.kolodaView.delegate = self
 		
-//        let dispatchGroup = DispatchGroup()
-//        let dispatchQueue = DispatchQueue(label: "queue")
-//        dispatchGroup.enter();
-//        dispatchQueue.async(group: dispatchGroup) {
-//            self.getUsers(dg: dispatchGroup)
-//        }
-//
-//        dispatchQueue.async(group: dispatchGroup) {
-//            self.getUserFriends(dg: dispatchGroup)
-//        }
-//
-//        dispatchGroup.notify(queue: .main) {
-//            self.addUsersCollection()
-//			self.kolodaView.dataSource = self
-//			self.kolodaView.delegate = self
-//        }
-    }
-    
-    func getUsers (dg: DispatchGroup) {
-        let dataStore = Firestore.firestore()
-        let me: Me = Me.sharedInstance
-        let users = dataStore.collection("users")
-        let query = users.whereField("id", isEqualTo: me.getId())
-        query.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-                if querySnapshot!.documents.count == 1 {
-                    print("only one user data exists. ok")
-                } else {
-                    print("no data exists")
-                }
-            }
-            dg.leave()
-        }
-    }
-    
-    func addUsersCollection () {
-        let dataStore = Firestore.firestore()
-        let me: Me = Me.sharedInstance
-        let timeStamp = Int(Date().timeIntervalSince1970)
-        dataStore.collection("users").addDocument(data: [
-            "id": me.getId(),
-            "time": timeStamp
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added")
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,18 +72,26 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
         imageView.contentMode = .scaleAspectFit
 		let pictureUrl = userFriends[index].pictureUrl
         imageView.image = getImageByUrl(url: pictureUrl)
-		
 		view.addSubview(imageView)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30.0),
+            imageView.widthAnchor.constraint(equalToConstant: 300.0),
+            imageView.heightAnchor.constraint(equalToConstant: 300.0),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
 		
         let label = UILabel()
 		label.text = userFriends[index].name
 		view.addSubview(label)
 		label.frame = CGRect(x:0,y:0,width:200,height:100)
-		label.center = CGPoint(x:screenWidth/2,y:screenHeight/2 - 25)
-		label.textAlignment = NSTextAlignment.center
+        label.center = CGPoint(x: imageView.bounds.size.width/2,y: imageView.bounds.size.height - 25)
+        label.textAlignment = NSTextAlignment.center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-		label.sizeToFit()
+//		label.sizeToFit()
 		
         return view
     }
