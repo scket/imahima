@@ -38,7 +38,7 @@ class FireStoreService {
 						userLogin = UserLogin(id: id, login: login)
 					}
 				} else {
-					print("no data exists")
+					print("getUsersById: no data exists")
 				}
 			}
 			keepAlive = false
@@ -62,18 +62,48 @@ class FireStoreService {
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added")
+                print("setUsersCollection: Document added")
             }
         }
     }
+    
+    /*
+     Likeをしたユーザーのリストを取得する
+     存在しない場合は空配列を返す
+     */
+    func getUsersLikedList(id: String) -> [[String: Any]]? {
+        var keepAlive = true
+        var likedList: [[String: Any]] = []
+        let dataStore = Firestore.firestore()
+        let matching = dataStore.collection("matching")
+        
+        matching.document(id).getDocument{(snap, error) in
+            if let document = snap, snap!.exists {
+                likedList = document.get("likedList") as! [[String : Any]]
+            } else {
+                print("getUsersLikedList: Document does not exist")
+            }
+            keepAlive = false
+        }
+        
+        let runLoop = RunLoop.current
+        while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
+        return likedList
+    }
 	
-	func setUserLiked (id: String, likedUser: [String: Any]) {
+    /*
+     Likeをしたユーザーのリストを作成・更新する
+     */
+    func setUserLikedList (list: [[String: Any]]) {
+        let me: Me = Me.sharedInstance
 		let dataStore = Firestore.firestore()
-		dataStore.collection("matching").document(id).setData(likedUser) { err in
+        dataStore.collection("matching").document(me.getId()).setData([
+            "likedList": list
+        ], merge: true) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added")
+                print("setUserLikedList: Document added")
             }
         }
 	}
