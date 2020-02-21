@@ -15,14 +15,19 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     @IBOutlet weak var kolodaView: KolodaView!
     
     var userFriends: Array<User> = []
+	var likedList: [[String: Any]] = []
+    let fireStoreService = FireStoreService()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let me: Me = Me.sharedInstance
+        likedList = self.fireStoreService.getUsersLikedList(id: me.getId())!
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Main"
 		
-		// 自分のログイン情報を非同期で更新
-		let fireStoreService = FireStoreService()
-		fireStoreService.setUsersCollection()
+        self.fireStoreService.setUsersCollection()
 		
 		// Facebookの友人情報を取得
 		let userFriendsService = UserFriendsService()
@@ -31,7 +36,7 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
 		// Facebookの友人のログイン時間をFireStoreから取得
 		var friendsLogin: Array<UserLogin> = []
 		for friend in userFriends {
-			let result: UserLogin = fireStoreService.getUsersById(id: friend.id)
+            let result: UserLogin = self.fireStoreService.getUsersById(id: friend.id)
 			if(!result.isEmpty()) {
 				friendsLogin.append(result)
 			}
@@ -136,6 +141,11 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
 
     // dragの方向などを設定
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+		if (direction.rawValue == "right") {
+			like(index: index)
+        } else if (direction.rawValue == "left") {
+            nope(index: index)
+        }
         print(index, direction)
     }
 
@@ -147,5 +157,47 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     // Likeを押した場合は右へスワイプ
     @IBAction func cardGoToLike() {
         kolodaView.swipe(.right)
+    }
+	
+	func like(index: Int) {
+        var existIndex: Int? = nil
+        let userId = userFriends[index].id
+        let timestamp = Int(Date().timeIntervalSince1970)
+        
+        for (index, list) in self.likedList.enumerated() {
+            if list["id"] as! String == userId {
+                print("existId")
+                existIndex = index
+                break
+            }
+        }
+        
+        if (existIndex != nil) {
+            self.likedList[existIndex!].updateValue(timestamp, forKey: "likedAt")
+        } else {
+            self.likedList.append([
+                "id": userId,
+                "likedAt": timestamp
+            ])
+        }
+        
+        print("id: \(userId), likedAt: \(timestamp)")
+        print(self.likedList)
+        self.fireStoreService.setUserLikedList(list: self.likedList)
+	}
+    
+    func nope (index: Int) {
+        var existIndex: Int? = nil
+        for (index, list) in self.likedList.enumerated() {
+            if list["id"] as! String == userFriends[index].id {
+                existIndex = index
+                break
+            }
+        }
+        
+        if (existIndex != nil) {
+            self.likedList.remove(at: existIndex!)
+            self.fireStoreService.setUserLikedList(list: self.likedList)
+        }
     }
 }
