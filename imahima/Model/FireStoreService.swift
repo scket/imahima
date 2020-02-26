@@ -35,7 +35,7 @@ class FireStoreService {
 						let doc = document.data() as NSDictionary
 						let id: String = doc.object(forKey: "id") as? String ?? ""
 						let login: Int = doc.object(forKey: "time") as? Int ?? 0
-						userLogin = UserLogin(id: id, login: login)
+                        userLogin = UserLogin(id: id, login: login)
 					}
 				} else {
 					print("getUsersById: no data exists")
@@ -107,4 +107,43 @@ class FireStoreService {
             }
         }
 	}
+    
+    /*
+     meが所属しているチャットルームのリストを取得する
+    */
+    func getChatRooms() -> Array<ChatRoom>! {
+        print("call getChatRooms")
+        
+        var keepAlive = true
+        
+        let me: Me = Me.sharedInstance
+        var chatrooms: Array<ChatRoom> = []
+        
+        let dataStore = Firestore.firestore()
+        let resourse = dataStore.collection("chatrooms")
+        let query = resourse.whereField("members", arrayContains: me.getId())
+        
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                if querySnapshot!.documents.count == 1 {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        let doc = document.data() as NSDictionary
+                        let id: String = document.documentID
+                        let members: Array<String> = doc.object(forKey: "members") as? Array<String> ?? []
+                        let messages: Array<[String: Any]>  = doc.object(forKey: "messages") as? Array<[String: Any]> ?? []
+                        chatrooms.append(ChatRoom(id: id, members: members, messages: messages))
+                    }
+                } else {
+                    print("getChatRooms: no data exists")
+                }
+            }
+            keepAlive = false
+        }
+        let runLoop = RunLoop.current
+        while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
+        return chatrooms
+    }
 }

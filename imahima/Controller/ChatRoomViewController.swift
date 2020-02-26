@@ -10,12 +10,18 @@ import UIKit
 
 class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let chatRoomList = ["yugoto", "stakeshi"]
+//    let chatRoomList = ["yugoto", "stakeshi"]
+    var chatRoomList: Array<ChatRoom> = []
+    var userFriends: Array<User> = []
+    let fireStoreService = FireStoreService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.title = "ChatRoom"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.chatRoomList = self.fireStoreService.getChatRooms()!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -24,7 +30,7 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel!.text = chatRoomList[indexPath.row]
+        cell.textLabel!.text = chatRoomList[indexPath.row].getRoomName()
         return cell
     }
     
