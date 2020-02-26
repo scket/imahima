@@ -13,6 +13,7 @@ import InputBarAccessoryView
 class ChatViewController: MessagesViewController {
     
     var messageList: [MockMessage] = []
+    let me: Me = Me.sharedInstance
     
     lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -68,25 +69,40 @@ class ChatViewController: MessagesViewController {
         ]
     }
     
-    func createOtherMessage(text: String) -> MockMessage {
-        let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15),
-                                                                           .foregroundColor: UIColor.black])
-        return MockMessage(attributedText: attributedText, sender: otherSender() , messageId: UUID().uuidString, date: Date())
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+// メッセージのclass管理用のextension
+extension ChatViewController {
+    func createSelfMessage (text: String) -> MockMessage {
+        let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.white])
+        return MockMessage(attributedText: attributedText, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: Date())
+    }
+    
+    func createSelfMessage (image: UIImage) -> MockMessage {
+        return MockMessage(image: image, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: Date())
+    }
+    
+    func createOtherMessage(text: String) -> MockMessage {
+        let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.black])
+        return MockMessage(attributedText: attributedText, sender: otherSender() as! Sender , messageId: UUID().uuidString, date: Date())
+    }
+    
+    func createOtherMessage (image: UIImage) -> MockMessage {
+        return MockMessage(image: image, sender: otherSender() as! Sender , messageId: UUID().uuidString, date: Date())
     }
 }
 
 // DataSource
 extension ChatViewController: MessagesDataSource {
     func currentSender() -> SenderType {
-        return Sender(id: "123", displayName: "me")
+        return Sender(id: me.getId(), displayName: me.getName())
     }
     
-    func otherSender() -> Sender {
-        return Sender(id: "456", displayName: "you")
+    func otherSender(id: String = "hoge", displayName: String = "you") -> SenderType {
+        return Sender(id: id, displayName: displayName)
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -197,15 +213,13 @@ extension ChatViewController: MessageInputBarDelegate {
         for component in inputBar.inputTextView.components {
             if let image = component as? UIImage {
 
-                let imageMessage = MockMessage(image: image, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: Date())
+                let imageMessage = createSelfMessage(image: image)
                 messageList.append(imageMessage)
                 messagesCollectionView.insertSections([messageList.count - 1])
 
             } else if let text = component as? String {
 
-                let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15),
-                                                                                   .foregroundColor: UIColor.white])
-                let message = MockMessage(attributedText: attributedText, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: Date())
+                let message = createSelfMessage(text: text)
                 messageList.append(message)
                 messagesCollectionView.insertSections([messageList.count - 1])
             }
