@@ -129,12 +129,11 @@ class FireStoreService {
             } else {
                 if querySnapshot!.documents.count == 1 {
                     for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
+                        print("\(document.documentID) => \(document.data()))")
                         let doc = document.data() as NSDictionary
                         let id: String = document.documentID
                         let members: Array<String> = doc.object(forKey: "members") as? Array<String> ?? []
-                        let messages: Array<[String: Any]>  = doc.object(forKey: "messages") as? Array<[String: Any]> ?? []
-                        chatrooms.append(ChatRoom(id: id, members: members, messages: messages))
+                        chatrooms.append(ChatRoom(id: id, members: members))
                     }
                 } else {
                     print("getChatRooms: no data exists")

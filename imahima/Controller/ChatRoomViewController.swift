@@ -21,6 +21,10 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // Facebookの友人情報を取得
+        let userFriendsService = UserFriendsService()
+        userFriends = userFriendsService.getUserFriends()
+        
         self.chatRoomList = self.fireStoreService.getChatRooms()!
     }
     
@@ -30,7 +34,12 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel!.text = chatRoomList[indexPath.row].getRoomName()
+        
+        let userId: String = chatRoomList[indexPath.row].getRoomName()
+        let roomName: String = self.userFriends.filter{ $0.id == userId }[0].name
+        
+        cell.textLabel!.text = roomName
+        
         return cell
     }
     

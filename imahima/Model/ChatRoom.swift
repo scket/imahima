@@ -11,12 +11,10 @@ import Foundation
 class ChatRoom {
     var id: String
     var members: Array<String>
-    var messages: [[String: Any]]
     
-    init(id: String, members: Array<String>, messages: [[String: Any]]) {
+    init(id: String, members: Array<String>) {
         self.id = id
         self.members = members
-        self.messages = messages
     }
     
     // me以外のmembersのidをroom名として返す
