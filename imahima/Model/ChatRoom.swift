@@ -17,9 +17,9 @@ class ChatRoom {
         self.members = members
     }
     
-    // me以外のmembersのidをroom名として返す
+    // me以外のmembersのidを返す
     // [Extension]: 複数名部屋に所属する場合を考える
-    func getRoomName() -> String {
+    func getOtherMemberId() -> String {
         let me: Me = Me.sharedInstance
         return self.members.filter{ $0 != me.getId() }[0]
     }

@@ -2,6 +2,8 @@
 //  MockMessage.swift
 //  imahima
 //
+//  MessageKitで管理する用ののモデル
+//
 //  Created by Shota Takeshima on 2019/12/11.
 //  Copyright © 2019 後藤祐貴. All rights reserved.
 //

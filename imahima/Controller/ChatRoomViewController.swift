@@ -35,7 +35,7 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let userId: String = chatRoomList[indexPath.row].getRoomName()
+        let userId: String = chatRoomList[indexPath.row].getOtherMemberId()
         let roomName: String = self.userFriends.filter{ $0.id == userId }[0].name
         
         cell.textLabel!.text = roomName
@@ -51,6 +51,7 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Chat", bundle: nil)//遷移先のStoryboardを設定
         let nextView = storyboard.instantiateViewController(withIdentifier: "Chat") as! ChatViewController//遷移先のViewControllerを設定
+        nextView.roomId = chatRoomList[indexPath.row].id
         self.navigationController?.pushViewController(nextView, animated: true)//遷移する
     }
     
