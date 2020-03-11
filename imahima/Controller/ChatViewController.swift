@@ -12,8 +12,11 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
     
+    var roomId: String = ""
+    
     var messageList: [MockMessage] = []
     let me: Me = Me.sharedInstance
+    let fireStoreService = FireStoreService()
     
     lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -21,18 +24,33 @@ class ChatViewController: MessagesViewController {
         return formatter
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        let messageDateList: Array<MessageData> = fireStoreService.getMessageData(id: self.roomId)
         
         // メインスレッドで非同期にメッセージを取得
         DispatchQueue.main.async {
-            // messageListにメッセージの配列をいれて
-            self.messageList = self.getMessages()
-            // messagesCollectionViewをリロードして
-            self.messagesCollectionView.reloadData()
-            // 一番下までスクロールする
-            self.messagesCollectionView.scrollToBottom()
+            for messageData in messageDateList {
+                if (messageData.from == self.me.getId()) {
+                    self.messageList.append(self.createSelfMessage(text: messageData.message, date: messageData.createdAt))
+                } else {
+                    self.messageList.append(self.createOtherMessage(text: messageData.message, date:     messageData.createdAt))
+                }
+            }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        // メインスレッドで非同期にメッセージを取得
+//        DispatchQueue.main.async {
+//            // messageListにメッセージの配列をいれて
+//            self.messageList = self.getMessages()
+//            // messagesCollectionViewをリロードして
+//            self.messagesCollectionView.reloadData()
+//            // 一番下までスクロールする
+//            self.messagesCollectionView.scrollToBottom()
+//        }
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -76,22 +94,33 @@ class ChatViewController: MessagesViewController {
 
 // メッセージのclass管理用のextension
 extension ChatViewController {
-    func createSelfMessage (text: String) -> MockMessage {
+    func createSelfMessage (text: String, date: String! = nil) -> MockMessage {
         let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.white])
-        return MockMessage(attributedText: attributedText, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: Date())
+        return MockMessage(attributedText: attributedText, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: switchUnixToDate(timestamp: date))
     }
     
-    func createSelfMessage (image: UIImage) -> MockMessage {
-        return MockMessage(image: image, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: Date())
+    func createSelfMessage (image: UIImage, date: String! = nil) -> MockMessage {
+        return MockMessage(image: image, sender: currentSender() as! Sender, messageId: UUID().uuidString, date: switchUnixToDate(timestamp: date))
     }
     
-    func createOtherMessage(text: String) -> MockMessage {
+    func createOtherMessage(text: String, date: String! = nil) -> MockMessage {
         let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15),.foregroundColor: UIColor.black])
-        return MockMessage(attributedText: attributedText, sender: otherSender() as! Sender , messageId: UUID().uuidString, date: Date())
+        return MockMessage(attributedText: attributedText, sender: otherSender() as! Sender , messageId: UUID().uuidString, date: switchUnixToDate(timestamp: date))
     }
     
-    func createOtherMessage (image: UIImage) -> MockMessage {
-        return MockMessage(image: image, sender: otherSender() as! Sender , messageId: UUID().uuidString, date: Date())
+    func createOtherMessage (image: UIImage, date: String! = nil) -> MockMessage {
+        return MockMessage(image: image, sender: otherSender() as! Sender , messageId: UUID().uuidString, date: switchUnixToDate(timestamp: date))
+    }
+    
+    func switchUnixToDate (timestamp: String! = nil) -> Date {
+        if (timestamp == nil) {
+            return Date()
+        } else {
+            var int64 = Int64(timestamp) ?? 0
+            int64 = int64 / 1000
+            let timeIterval = TimeInterval(integerLiteral: int64)
+            return Date(timeIntervalSince1970: timeIterval)
+        }
     }
 }
 

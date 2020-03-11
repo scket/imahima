@@ -145,4 +145,41 @@ class FireStoreService {
         while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
         return chatrooms
     }
+    
+    /*
+     チャットルームIDからチャットの内容を取り出す
+    */
+    func getMessageData(id: String) -> Array<MessageData>! {
+        print("call getMessageData")
+        
+        var keepAlive = true
+        
+        var messageList: Array<MessageData> = []
+        
+        let dataStore = Firestore.firestore()
+        let resourse = dataStore.collection("chatrooms").document(id).collection("messages")
+        
+        resourse.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                if querySnapshot!.documents.count == 1 {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data()))")
+                        let doc = document.data() as NSDictionary
+                        let from: String = doc.object(forKey: "from") as! String
+                        let createdAt: String = doc.object(forKey: "createdAt") as! String
+                        let message: String = doc.object(forKey: "message") as! String
+                        messageList.append(MessageData(from: from, createdAt: createdAt, message: message))
+                    }
+                } else {
+                    print("getChatRooms: no data exists")
+                }
+            }
+            keepAlive = false
+        }
+        let runLoop = RunLoop.current
+        while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
+        return messageList
+    }
 }
