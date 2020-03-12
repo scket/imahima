@@ -10,7 +10,6 @@ import UIKit
 
 class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-//    let chatRoomList = ["yugoto", "stakeshi"]
     var chatRoomList: Array<ChatRoom> = []
     var userFriends: Array<User> = []
     let fireStoreService = FireStoreService()
@@ -46,12 +45,16 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)
-        // 別の画面に遷移
-//        self.transitionToChat()
+        
+        let userId: String = chatRoomList[indexPath.row].getOtherMemberId()
+        let partner: User = self.userFriends.filter{ $0.id == userId }[0]
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Chat", bundle: nil)//遷移先のStoryboardを設定
         let nextView = storyboard.instantiateViewController(withIdentifier: "Chat") as! ChatViewController//遷移先のViewControllerを設定
+        
         nextView.roomId = chatRoomList[indexPath.row].id
+        nextView.partner = partner
+        
         self.navigationController?.pushViewController(nextView, animated: true)//遷移する
     }
     

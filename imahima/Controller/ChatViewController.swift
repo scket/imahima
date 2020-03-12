@@ -13,6 +13,7 @@ import InputBarAccessoryView
 class ChatViewController: MessagesViewController {
     
     var roomId: String = ""
+    var partner: User = User(id: "", name: "", pictureUrl: "")
     
     var messageList: [MockMessage] = []
     let me: Me = Me.sharedInstance
@@ -36,21 +37,16 @@ class ChatViewController: MessagesViewController {
                     self.messageList.append(self.createOtherMessage(text: messageData.message, date:     messageData.createdAt))
                 }
             }
+            
+            // messagesCollectionViewをリロードして
+            self.messagesCollectionView.reloadData()
+            // 一番下までスクロールする
+            self.messagesCollectionView.scrollToBottom()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        // メインスレッドで非同期にメッセージを取得
-//        DispatchQueue.main.async {
-//            // messageListにメッセージの配列をいれて
-//            self.messageList = self.getMessages()
-//            // messagesCollectionViewをリロードして
-//            self.messagesCollectionView.reloadData()
-//            // 一番下までスクロールする
-//            self.messagesCollectionView.scrollToBottom()
-//        }
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -130,8 +126,8 @@ extension ChatViewController: MessagesDataSource {
         return Sender(id: me.getId(), displayName: me.getName())
     }
     
-    func otherSender(id: String = "hoge", displayName: String = "you") -> SenderType {
-        return Sender(id: id, displayName: displayName)
+    func otherSender() -> SenderType {
+        return Sender(id: self.partner.id, displayName: self.partner.name)
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
@@ -194,9 +190,13 @@ extension ChatViewController: MessagesDisplayDelegate {
         // message.sender.displayNameから送信者の名前を取得して、imageを出し分ける
         let avatar: Avatar
         
-        let me: Me = Me.sharedInstance
-        let pictureUrl = me.getPictureUrl()
-        
+        var pictureUrl = ""
+        if (message.sender.senderId == me.getId()) {
+            pictureUrl = me.getPictureUrl()
+        } else {
+            pictureUrl = self.partner.pictureUrl
+        }
+
         if let url = URL(string: pictureUrl) {
               do {
                  let imageData = try Data(contentsOf: url)
@@ -250,6 +250,14 @@ extension ChatViewController: MessageInputBarDelegate {
 
                 let message = createSelfMessage(text: text)
                 messageList.append(message)
+                fireStoreService.setMessageData(
+                    id: self.roomId,
+                    messageData: MessageData(
+                        from: me.getId(),
+                        createdAt: String(Int(message.sentDate.timeIntervalSince1970)),
+                        message: text
+                    )
+                )
                 messagesCollectionView.insertSections([messageList.count - 1])
             }
         }

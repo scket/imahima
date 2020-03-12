@@ -129,7 +129,6 @@ class FireStoreService {
             } else {
                 if querySnapshot!.documents.count == 1 {
                     for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data()))")
                         let doc = document.data() as NSDictionary
                         let id: String = document.documentID
                         let members: Array<String> = doc.object(forKey: "members") as? Array<String> ?? []
@@ -173,7 +172,7 @@ class FireStoreService {
                         messageList.append(MessageData(from: from, createdAt: createdAt, message: message))
                     }
                 } else {
-                    print("getChatRooms: no data exists")
+                    print("getMessageData: no data exists")
                 }
             }
             keepAlive = false
@@ -181,5 +180,28 @@ class FireStoreService {
         let runLoop = RunLoop.current
         while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
         return messageList
+    }
+    
+    /*
+     チャットの内容を追加する
+    */
+    func setMessageData(id: String, messageData: MessageData) {
+        print("call setMessageData")
+        
+        let dataStore = Firestore.firestore()
+        let resourse = dataStore.collection("chatrooms").document(id).collection("messages")
+        
+        resourse.addDocument(data: [
+            "from": messageData.from,
+            "createdAt": messageData.createdAt,
+            "message": messageData.message,
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+                
+            } else {
+                print("setMessageData: Document added")
+            }
+        }
     }
 }
