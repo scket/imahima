@@ -10,6 +10,9 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 
+import Firebase
+import FirebaseFirestore
+
 class ChatViewController: MessagesViewController {
     
     var roomId: String = ""
@@ -18,6 +21,7 @@ class ChatViewController: MessagesViewController {
     var messageList: [MockMessage] = []
     let me: Me = Me.sharedInstance
     let fireStoreService = FireStoreService()
+    var snapshotLisener: ListenerRegistration?
     
     lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -25,23 +29,26 @@ class ChatViewController: MessagesViewController {
         return formatter
     }()
     
+    // メッセージ追加用のクロージャ
+    func messageAdded (messageData: MessageData) {
+        self.messageList.append(self.branchMessageData(messageData: messageData))
+        self.messagesCollectionView.insertSections([self.messageList.count - 1])
+        self.messagesCollectionView.scrollToBottom()
+    }
+    
+    // メッセージを送信者によって振り分ける
+    func branchMessageData (messageData: MessageData) -> MockMessage {
+        if (messageData.from == self.me.getId()) {
+            return self.createSelfMessage(text: messageData.message, date: messageData.createdAt)
+        } else {
+            return self.createOtherMessage(text: messageData.message, date: messageData.createdAt)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        let messageDateList: Array<MessageData> = fireStoreService.getMessageData(id: self.roomId)
-        
         // メインスレッドで非同期にメッセージを取得
         DispatchQueue.main.async {
-            for messageData in messageDateList {
-                if (messageData.from == self.me.getId()) {
-                    self.messageList.append(self.createSelfMessage(text: messageData.message, date: messageData.createdAt))
-                } else {
-                    self.messageList.append(self.createOtherMessage(text: messageData.message, date:     messageData.createdAt))
-                }
-            }
-            
-            // messagesCollectionViewをリロードして
-            self.messagesCollectionView.reloadData()
-            // 一番下までスクロールする
-            self.messagesCollectionView.scrollToBottom()
+            self.fireStoreService.getMessageData(id: self.roomId, completion: self.messageAdded)
         }
     }
     
@@ -60,31 +67,16 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         self.becomeFirstResponder()
-    }
-    
-    // サンプル用メッセージ
-    func getMessages() -> [MockMessage] {
-        return [
-            createOtherMessage(text: "あ"),
-            createOtherMessage(text: "い"),
-            createOtherMessage(text: "う"),
-            createOtherMessage(text: "え"),
-            createOtherMessage(text: "お"),
-            createOtherMessage(text: "か"),
-            createOtherMessage(text: "き"),
-            createOtherMessage(text: "く"),
-            createOtherMessage(text: "け"),
-            createOtherMessage(text: "こ"),
-            createOtherMessage(text: "さ"),
-            createOtherMessage(text: "し"),
-            createOtherMessage(text: "すせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"),
-        ]
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear( animated )
+        fireStoreService.removeSnapshotListenr()
     }
 }
 
@@ -112,10 +104,7 @@ extension ChatViewController {
         if (timestamp == nil) {
             return Date()
         } else {
-            var int64 = Int64(timestamp) ?? 0
-            int64 = int64 / 1000
-            let timeIterval = TimeInterval(integerLiteral: int64)
-            return Date(timeIntervalSince1970: timeIterval)
+            return Date(timeIntervalSince1970: Double(timestamp)!)
         }
     }
 }
@@ -243,13 +232,13 @@ extension ChatViewController: MessageInputBarDelegate {
             if let image = component as? UIImage {
 
                 let imageMessage = createSelfMessage(image: image)
-                messageList.append(imageMessage)
+                self.messageList.append(imageMessage)
                 messagesCollectionView.insertSections([messageList.count - 1])
 
             } else if let text = component as? String {
 
                 let message = createSelfMessage(text: text)
-                messageList.append(message)
+//                self.messageList.append(message)
                 fireStoreService.setMessageData(
                     id: self.roomId,
                     messageData: MessageData(
@@ -258,7 +247,7 @@ extension ChatViewController: MessageInputBarDelegate {
                         message: text
                     )
                 )
-                messagesCollectionView.insertSections([messageList.count - 1])
+//                messagesCollectionView.insertSections([messageList.count - 1])
             }
         }
         inputBar.inputTextView.text = String()

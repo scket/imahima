@@ -13,6 +13,8 @@ import FirebaseFirestore
 FireStoreのコレクション操作を提供するクラス
 */
 class FireStoreService {
+    
+    var snapshotLisener: ListenerRegistration?
 	
 	/*
 	Facebook IDからそのIDのログイン時間をFireStoreから取得する
@@ -127,7 +129,7 @@ class FireStoreService {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                if querySnapshot!.documents.count == 1 {
+                if querySnapshot!.documents.count != 0 {
                     for document in querySnapshot!.documents {
                         let doc = document.data() as NSDictionary
                         let id: String = document.documentID
@@ -146,44 +148,40 @@ class FireStoreService {
     }
     
     /*
-     チャットルームIDからチャットの内容を取り出す
+     チャットルームIDからメッセージ一覧を取り出す
     */
-    func getMessageData(id: String) -> Array<MessageData>! {
+    func getMessageData(id: String, completion: @escaping (MessageData) -> Void) {
         print("call getMessageData")
         
-        var keepAlive = true
-        
-        var messageList: Array<MessageData> = []
-        
         let dataStore = Firestore.firestore()
-        let resourse = dataStore.collection("chatrooms").document(id).collection("messages")
+        let resourse = dataStore.collection("chatrooms").document(id).collection("messages").order(by: "createdAt", descending: false)
         
-        resourse.getDocuments() { (querySnapshot, err) in
-            if let err = err {
+        self.snapshotLisener = resourse.addSnapshotListener { (querySnapshot, err) in
+           if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                if querySnapshot!.documents.count == 1 {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data()))")
-                        let doc = document.data() as NSDictionary
-                        let from: String = doc.object(forKey: "from") as! String
-                        let createdAt: String = doc.object(forKey: "createdAt") as! String
-                        let message: String = doc.object(forKey: "message") as! String
-                        messageList.append(MessageData(from: from, createdAt: createdAt, message: message))
+               querySnapshot?.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                       let doc = diff.document.data() as NSDictionary
+                       let from: String = doc.object(forKey: "from") as! String
+                       let createdAt: String = doc.object(forKey: "createdAt") as! String
+                       let message: String = doc.object(forKey: "message") as! String
+                       completion(MessageData(from: from, createdAt: createdAt, message: message))
                     }
-                } else {
-                    print("getMessageData: no data exists")
                 }
             }
-            keepAlive = false
         }
-        let runLoop = RunLoop.current
-        while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
-        return messageList
     }
     
     /*
-     チャットの内容を追加する
+     チャットルームIDに応じたメッセージのクエリを返す
+    */
+    func getMessageDataResource(id: String) -> Query {
+        return Firestore.firestore().collection("chatrooms").document(id).collection("messages").order(by: "createdAt", descending: false)
+    }
+    
+    /*
+     メッセージを追加する
     */
     func setMessageData(id: String, messageData: MessageData) {
         print("call setMessageData")
@@ -203,5 +201,14 @@ class FireStoreService {
                 print("setMessageData: Document added")
             }
         }
+    }
+    
+    /*
+        起動中のリスナを削除する
+    */
+    func removeSnapshotListenr () {
+        print("call removeSnapshotListenr")
+        
+        if let w = self.snapshotLisener { w.remove() }
     }
 }
