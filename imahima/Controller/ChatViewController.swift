@@ -21,7 +21,6 @@ class ChatViewController: MessagesViewController {
     var messageList: [MockMessage] = []
     let me: Me = Me.sharedInstance
     let fireStoreService = FireStoreService()
-    var snapshotLisener: ListenerRegistration?
     
     lazy var formatter: DateFormatter = {
         let formatter = DateFormatter()
