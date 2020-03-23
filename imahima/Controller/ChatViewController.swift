@@ -10,9 +10,6 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 
-import Firebase
-import FirebaseFirestore
-
 class ChatViewController: MessagesViewController {
     
     var roomId: String = ""
