@@ -13,6 +13,8 @@ import FirebaseFirestore
 FireStoreのコレクション操作を提供するクラス
 */
 class FireStoreService {
+    
+    var snapshotLisener: ListenerRegistration?
 	
 	/*
 	Facebook IDからそのIDのログイン時間をFireStoreから取得する
@@ -35,7 +37,7 @@ class FireStoreService {
 						let doc = document.data() as NSDictionary
 						let id: String = doc.object(forKey: "id") as? String ?? ""
 						let login: Int = doc.object(forKey: "time") as? Int ?? 0
-						userLogin = UserLogin(id: id, login: login)
+                        userLogin = UserLogin(id: id, login: login)
 					}
 				} else {
 					print("getUsersById: no data exists")
@@ -107,4 +109,106 @@ class FireStoreService {
             }
         }
 	}
+    
+    /*
+     meが所属しているチャットルームのリストを取得する
+    */
+    func getChatRooms() -> Array<ChatRoom>! {
+        print("call getChatRooms")
+        
+        var keepAlive = true
+        
+        let me: Me = Me.sharedInstance
+        var chatrooms: Array<ChatRoom> = []
+        
+        let dataStore = Firestore.firestore()
+        let resourse = dataStore.collection("chatrooms")
+        let query = resourse.whereField("members", arrayContains: me.getId())
+        
+        query.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                if querySnapshot!.documents.count != 0 {
+                    for document in querySnapshot!.documents {
+                        let doc = document.data() as NSDictionary
+                        let id: String = document.documentID
+                        let members: Array<String> = doc.object(forKey: "members") as? Array<String> ?? []
+                        chatrooms.append(ChatRoom(id: id, members: members))
+                    }
+                } else {
+                    print("getChatRooms: no data exists")
+                }
+            }
+            keepAlive = false
+        }
+        let runLoop = RunLoop.current
+        while keepAlive && runLoop.run(mode: RunLoop.Mode.default, before: Date(timeIntervalSinceNow: 0.01)) {}
+        return chatrooms
+    }
+    
+    /*
+     チャットルームIDからメッセージ一覧を取り出す
+    */
+    func getMessageData(id: String, completion: @escaping (MessageData) -> Void) {
+        print("call getMessageData")
+        
+        let dataStore = Firestore.firestore()
+        let resourse = dataStore.collection("chatrooms").document(id).collection("messages").order(by: "createdAt", descending: false)
+        
+        self.snapshotLisener = resourse.addSnapshotListener { (querySnapshot, err) in
+           if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+               querySnapshot?.documentChanges.forEach { diff in
+                    if (diff.type == .added) {
+                       let doc = diff.document.data() as NSDictionary
+                       let from: String = doc.object(forKey: "from") as! String
+                       let createdAt: String = doc.object(forKey: "createdAt") as! String
+                       let message: String = doc.object(forKey: "message") as! String
+                       completion(MessageData(from: from, createdAt: createdAt, message: message))
+                    }
+                }
+            }
+        }
+    }
+    
+    /*
+     チャットルームIDに応じたメッセージのクエリを返す
+    */
+    func getMessageDataResource(id: String) -> Query {
+        return Firestore.firestore().collection("chatrooms").document(id).collection("messages").order(by: "createdAt", descending: false)
+    }
+    
+    /*
+     メッセージを追加する
+    */
+    func setMessageData(id: String, messageData: MessageData) {
+        print("call setMessageData")
+        
+        let dataStore = Firestore.firestore()
+        let resourse = dataStore.collection("chatrooms").document(id).collection("messages")
+        
+        resourse.addDocument(data: [
+            "from": messageData.from,
+            "createdAt": messageData.createdAt,
+            "message": messageData.message,
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+                
+            } else {
+                print("setMessageData: Document added")
+            }
+        }
+    }
+    
+    /*
+        起動中のリスナを削除する
+    */
+    func removeSnapshotListenr () {
+        print("call removeSnapshotListenr")
+        
+        if let w = self.snapshotLisener { w.remove() }
+    }
 }
