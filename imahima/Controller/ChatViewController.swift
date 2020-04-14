@@ -221,9 +221,9 @@ extension ChatViewController: MessageCellDelegate {
     }
 }
 
-extension ChatViewController: MessageInputBarDelegate {
+extension ChatViewController: InputBarAccessoryViewDelegate {
     // メッセージ送信ボタンをタップした時の挙動
-    func inputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         for component in inputBar.inputTextView.components {
             if let image = component as? UIImage {
 
