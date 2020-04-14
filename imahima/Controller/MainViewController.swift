@@ -206,6 +206,7 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     }
 }
 
+// 位置情報連携用のextension
 extension MainViewController {
     func setupLocationManager() {
         self.locationManager = CLLocationManager()
@@ -246,6 +247,7 @@ extension MainViewController {
     }
 }
 
+// location: delegate
 extension MainViewController: CLLocationManagerDelegate {
     // 位置情報が更新された際、位置情報を格納する
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -256,6 +258,7 @@ extension MainViewController: CLLocationManagerDelegate {
         print("latitude: \(String(describing: latitude)), longitude: \(String(describing: longitude))")
     }
     
+    // 位置情報の取得に失敗した際に呼ばれる
     func locationManager(_ manager: CLLocationManager, didFailWithError err: Error) {
         print("Error(locationManager): \(err.localizedDescription)")
     }
