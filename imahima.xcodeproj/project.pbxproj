@@ -20,6 +20,8 @@
 		ABDFE78023A1291700B2D84C /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABDFE77F23A1291700B2D84C /* Chat.storyboard */; };
 		ABDFE78223A1297200B2D84C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFE78123A1297200B2D84C /* ChatViewController.swift */; };
 		ABDFE78423A12C8400B2D84C /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDFE78323A12C8400B2D84C /* MockMessage.swift */; };
+		ABF5AA8724000137009078A3 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF5AA8624000137009078A3 /* ChatRoom.swift */; };
+		ABF5AA8924193973009078A3 /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF5AA8824193973009078A3 /* MessageData.swift */; };
 		B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6172343236EE54F006E0FA6 /* AppDelegate.swift */; };
 		B617234D236EE550006E0FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B617234C236EE550006E0FA6 /* Assets.xcassets */; };
 		B630438623842CD000BFE13E /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630438523842CD000BFE13E /* LogoutViewController.swift */; };
@@ -49,6 +51,8 @@
 		ABDFE77F23A1291700B2D84C /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		ABDFE78123A1297200B2D84C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		ABDFE78323A12C8400B2D84C /* MockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
+		ABF5AA8624000137009078A3 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		ABF5AA8824193973009078A3 /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
 		B6172340236EE54F006E0FA6 /* imahima.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = imahima.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6172343236EE54F006E0FA6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B617234C236EE550006E0FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				B64FEBD723A25490005A9BD7 /* User.swift */,
 				B6BDA79123D5E30600DF9079 /* UserLogin.swift */,
 				B695795F23D9BF2500987F39 /* UserLiked.swift */,
+				ABF5AA8624000137009078A3 /* ChatRoom.swift */,
+				ABF5AA8824193973009078A3 /* MessageData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,10 +297,12 @@
 				AB80666D237D767300292033 /* RootViewController.swift in Sources */,
 				B6172344236EE54F006E0FA6 /* AppDelegate.swift in Sources */,
 				ABDFE78423A12C8400B2D84C /* MockMessage.swift in Sources */,
+				ABF5AA8724000137009078A3 /* ChatRoom.swift in Sources */,
 				B630438F23869DB500BFE13E /* UserFriendsService.swift in Sources */,
 				AB806670237D767300292033 /* LoginViewController.swift in Sources */,
 				B664608723D5DD6100528F62 /* FireStoreService.swift in Sources */,
 				B64FEBD823A25490005A9BD7 /* User.swift in Sources */,
+				ABF5AA8924193973009078A3 /* MessageData.swift in Sources */,
 				ABA0D1ED2386B82900362DD6 /* MainViewController.swift in Sources */,
 				B64FEBDA23A25FBE005A9BD7 /* MyProfileService.swift in Sources */,
 				B6BDA79223D5E30600DF9079 /* UserLogin.swift in Sources */,
