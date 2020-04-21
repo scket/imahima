@@ -10,6 +10,7 @@ import UIKit
 import Koloda
 import Firebase
 import FirebaseFirestore
+import CoreLocation
 
 class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDelegate {
     @IBOutlet weak var kolodaView: KolodaView!
@@ -17,6 +18,8 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     var userFriends: Array<User> = []
 	var likedList: [[String: Any]] = []
     let fireStoreService = FireStoreService()
+    
+    var locationManager: CLLocationManager!
     
     override func viewWillAppear(_ animated: Bool) {
         let me: Me = Me.sharedInstance
@@ -26,7 +29,8 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Main"
-		
+        
+        self.setupLocationManager()
         self.fireStoreService.setUsersCollection()
 		
 		// Facebookの友人情報を取得
@@ -200,4 +204,63 @@ class MainViewController: UIViewController, KolodaViewDataSource, KolodaViewDele
             self.fireStoreService.setUserLikedList(list: self.likedList)
         }
     }
+}
+
+// 位置情報連携用のextension
+extension MainViewController {
+    func setupLocationManager() {
+        self.locationManager = CLLocationManager()
+        
+        // 位置情報取得許可ダイアログの表示
+        guard let locationManager = self.locationManager else { return }
+        locationManager.requestWhenInUseAuthorization()
+        
+        // マネージャの設定
+        let status = CLLocationManager.authorizationStatus()
+        // ステータスごとの処理
+        if status == .authorizedWhenInUse {
+            locationManager.delegate = self
+            // 位置情報取得を開始
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    // 位置情報が許可されていない場合にアラートを出す
+    func showAlert() {
+        let alertTitle = "位置情報取得が許可されていません。"
+        let alertMessage = "設定アプリの「プライバシー > 位置情報サービス」から変更してください。"
+        let alert: UIAlertController = UIAlertController(
+            title: alertTitle,
+            message: alertMessage,
+            preferredStyle:  UIAlertController.Style.alert
+        )
+        // OKボタン
+        let defaultAction: UIAlertAction = UIAlertAction(
+            title: "OK",
+            style: UIAlertAction.Style.default,
+            handler: nil
+        )
+        // UIAlertController に Action を追加
+        alert.addAction(defaultAction)
+        // Alertを表示
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// location: delegate
+extension MainViewController: CLLocationManagerDelegate {
+    // 位置情報が更新された際、位置情報を格納する
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.first
+        let latitude = location?.coordinate.latitude
+        let longitude = location?.coordinate.longitude
+        fireStoreService.setUsersLocation(location: location!)
+        print("latitude: \(String(describing: latitude)), longitude: \(String(describing: longitude))")
+    }
+    
+    // 位置情報の取得に失敗した際に呼ばれる
+    func locationManager(_ manager: CLLocationManager, didFailWithError err: Error) {
+        print("Error(locationManager): \(err.localizedDescription)")
+    }
+    
 }

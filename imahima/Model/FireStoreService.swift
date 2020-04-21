@@ -9,6 +9,8 @@
 import Firebase
 import FirebaseFirestore
 
+import CoreLocation
+
 /*
 FireStoreのコレクション操作を提供するクラス
 */
@@ -60,6 +62,29 @@ class FireStoreService {
 		dataStore.collection("users").document(me.getId()).setData([
             "id": me.getId(),
             "time": timeStamp
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("setUsersCollection: Document added")
+            }
+        }
+    }
+    
+    /**
+    Facebook IDをkeyとしてユーザーの位置情報を更新する
+    */
+    func setUsersLocation (location: CLLocation) {
+        print("call setUsersLocation")
+        
+        let dataStore = Firestore.firestore()
+        let me: Me = Me.sharedInstance
+        
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        
+        dataStore.collection("users").document(me.getId()).setData([
+            "location": GeoPoint(latitude: latitude, longitude: longitude)
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
